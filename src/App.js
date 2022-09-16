@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React  from 'react';
+import NavSideBar from './components/NavSidebar'
+import {Routes,Route,HashRouter  as Router} from 'react-router-dom'
+import Profile from './pages/Profile'
+import Nutrition from './pages/Nutrition'
+import Fitness from './pages/Fitness'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App"  style={{
+      backgroundColor: '#F1EFEF'}}>
+      <Router>
+        <NavSideBar />
+        <Routes>
+          <Route exact path="/" element={<Profile />} />
+          <Route path="/nutrition" element={<Nutrition />} />
+          <Route path="/fitness" element={<Fitness />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
