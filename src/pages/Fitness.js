@@ -27,7 +27,6 @@ export default function Fitness() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  
     const excerciseNameFormatted = currentExcerciseInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
     const muscleNameFormatted = currentMuscleInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
 
@@ -41,9 +40,8 @@ export default function Fitness() {
         muscle:muscleNameFormatted
       }
       setinputworkoutExcercise([...inputworkoutExcercise, payload])
-      console.log(payload)
-      document.getElementsByClassName("excerciseForm").reset();
-    }else{
+    }
+    else{
       setinputworkoutExcercise(inputworkoutExcercise.map((excercise)=> {
         if(excercise.id==selectedId){
           return {
@@ -56,11 +54,8 @@ export default function Fitness() {
         }else{
           return excercise;
         }
-
       }));
-
     }
-   
   }
 
   const handleChangeMuscle = (muscleName) => {
@@ -149,7 +144,7 @@ export default function Fitness() {
         <div className='rightSection'>
       <div className='excerciseEntrySection'>
           <h2>Excercise Entry</h2>
-          <form onSubmit={handleSubmit} className='excerciseForm'>
+          <form onSubmit={handleSubmit} id='excerciseForm'>
             <label>Muscle Group
             <select value={currentMuscleInput} onChange={(e)=>setCurrentMuscleInput(e.target.value)}  className='excerciseFormInput'>
               <option disabled selected value> -- select an option -- </option>
@@ -219,13 +214,15 @@ export default function Fitness() {
             <div className='buttonWorkoutContainer'>
             <h3>{excercise.name}</h3>
             <div className='buttonsOnly'>
-            <button className='editButton' onClick={()=>{
+            <button className='editButton' 
+            onClick={()=>{
                  setCurrentExcerciseInput(excercise.name)
                 setCurrentMuscleInput(excercise.muscle)
                 setSetsInput(excercise.sets)
                 setRepsInput(excercise.reps)
               setTimeInput(excercise.time)
               setSelectedID(excercise.id)
+              console.log(excercise)
             }}>Edit</button>
             <button className='deleteButton' onClick={()=> {setinputworkoutExcercise(inputworkoutExcercise.filter((currentExcercise)=>currentExcercise.id!=excercise.id))}}>Delete</button>
             </div>
