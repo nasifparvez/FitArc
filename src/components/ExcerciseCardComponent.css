@@ -1,0 +1,23 @@
+.excerciseCardContainer{
+    width: 45%;
+    background-color: #ffffff;
+    border-color: black;
+    border: 1px solid;
+    padding-left: 10px;
+    border-radius: 25px;
+    border-style:none;
+    margin-left:30px;
+    margin-bottom:15px;
+}
+.addbutton{
+    position:relative;
+    background-color: green;
+    color:white;
+    float:right;
+    border-radius: 50%;
+    border-style: none;
+    right:20px;
+    height:20px;
+    width:20px;
+}
+

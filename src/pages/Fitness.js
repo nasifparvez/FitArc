@@ -1,72 +1,287 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState } from 'react';
 import {excerciseOptions, FetchDataExcercise} from '../utils/FetchDataExcercise'
-import './Fitness.css'
+import { muscleGroups } from "../utils/muscleGroups";
+import{ equipment } from '../utils/equipment';
+import ExcerciseCardComponent from "../components/ExcerciseCardComponent";
+import './Fitness.css';
+import EditEquipmentWindow from '../components/EditEquipmentWindow';
+import FitnessEquipmentList from '../components/FitnessEquipmentList';
+import FitnessMuscleList from '../components/FitnessMuscleList';
 
 export default function Fitness() {
-  const [search, setSearch] = useState('')
+  const [excercisesArray, setexcercisesArray] = useState([]);
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [excerciseUserInfo, setexcerciseUserInfo] = useState(null);
+  const [selectedEquipments, setSelectedEquipments] = useState([]);
+  const [selectedMuscle, setselectedMuscle] = useState([]);
+  const [currentExcerciseInput, setCurrentExcerciseInput] =useState("");
+  const [currentMuscleInput, setCurrentMuscleInput] =useState("");
+  const [setsInput, setSetsInput] = useState("");
+  const [repsInput, setRepsInput] = useState("");
+  const [timeInput, setTimeInput] = useState("");
 
-  const handleSearch = async () =>{
-    if(search){
-      const excercisesData = await FetchDataExcercise ('https://exercisedb.p.rapidapi.com/exercises/bodyPartList',excerciseOptions);
-      console.log(excercisesData);
+  const [inputworkoutExcercise, setinputworkoutExcercise] = useState([]);
+  const[selectedId, setSelectedID] = useState(null);
+
+  const [inputs, setInputs] = useState({});
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  
+    const excerciseNameFormatted = currentExcerciseInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    const muscleNameFormatted = currentMuscleInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+
+    if(selectedId==null){
+      const payload = {
+        id: Math.random().toString(),
+        name:excerciseNameFormatted,
+        time:timeInput,
+        reps:repsInput,
+        sets:setsInput,
+        muscle:muscleNameFormatted
+      }
+      setinputworkoutExcercise([...inputworkoutExcercise, payload])
+      console.log(payload)
+      document.getElementsByClassName("excerciseForm").reset();
+    }else{
+      setinputworkoutExcercise(inputworkoutExcercise.map((excercise)=> {
+        if(excercise.id==selectedId){
+          return {
+            name:excerciseNameFormatted,
+            time:timeInput,
+            reps:repsInput,
+            sets:setsInput,
+            muscle:muscleNameFormatted
+          }
+        }else{
+          return excercise;
+        }
+
+      }));
+
     }
+   
   }
 
+  const handleChangeMuscle = (muscleName) => {
+    const clicked = selectedMuscle.includes(muscleName);
+    console.log('this is: '+ clicked,muscleName );
+
+    if (!clicked) {
+      setselectedMuscle(
+        [...selectedMuscle, muscleName],
+      );
+    }
+    else {
+      setselectedMuscle(
+        selectedMuscle.filter((e) => e !== muscleName),
+      );
+    }
+  };
+  
+  const handleChangeEquipment = (equipmentName) => {
+    //Does the selected equipment include the click equipment item
+    const clicked = selectedEquipments.includes(equipmentName);
+    console.log('this is: '+ clicked,equipmentName );
+
+    if (!clicked) {
+      setSelectedEquipments(
+        [...selectedEquipments, equipmentName],
+      );
+    }
+    else {
+      setSelectedEquipments(
+        selectedEquipments.filter((e) => e !== equipmentName),
+      );
+    }
+
+  };
+
   return (
-    <div className="fitness">
-      <div className='titleContainer'>
-          <p className='fitnessPageTitle'>Your Workouts</p>
-      </div>
-      <div className='bodyPartGroupSection'>
-          <p className='subtitle'>What Body Part(s) Do You Want To Focus On Today?</p>
-          <div className='buttonSection'>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Back</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Cardio</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Chest</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Lower Arms</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Lower Legs</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Shoulders</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Upper Arms</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Upper Legs</button></div>
-            <div className='buttonContainer'><button type="button" className='bodyPartButton'>Waist</button></div>
+    <div className="fitnessContainer">
+      <div className='leftSection'>
+      <h1>Your Workouts</h1>
+      <div className='muscleGroupSection'>
+        <h2>What Muscle Group(s) Do You Want to Focus On Today</h2>
+        <FitnessMuscleList
+        handleChangeMuscle={handleChangeMuscle}
+        selectedMuscles={selectedMuscle}
+        />
+        </div>
+        <div className='equipementSection'>
+          <div className='equipmentHeader'>
+            <h2>Frequent Equipment Used</h2>
+            <button className='moreButton' onClick={() => setButtonPopup(true)}>|||||</button>
+            <EditEquipmentWindow trigger={buttonPopup}setTrigger={setButtonPopup}> 
+              <h3>Choose Equipment</h3>
+              <FitnessEquipmentList
+                handleChangeEquipment={handleChangeEquipment}
+                selectedEquipments={selectedEquipments}
+                />
+            </EditEquipmentWindow>
           </div>
+          <ul className='equipmentList' id='equipmentList'>
+          {selectedEquipments.map((item,i) => 
+              <li key={i}>{item}</li>
+            )}
+          </ul>
+        </div>
+        <button onClick={() => generateExcercises()}>Submit</button>
+        <div className='recommendedWorkoutSection'>
+          <h2>Recommended Workouts For Today</h2>
+          <div className='cardSection'>
+            {excercisesArray.map((excercise)=>
+              <ExcerciseCardComponent
+              className='excerciseCard'
+              onClick={()=> {
+                setCurrentExcerciseInput(excercise.name);
+                setCurrentMuscleInput(excercise.bodyPart);
+              }}
+              key={excercise.name}
+              img={excercise.gifUrl}
+              title={excercise.name}
+              />
+            )
+            }
+          </div>
+        </div>
+        </div>
+        <div className='rightSection'>
+      <div className='excerciseEntrySection'>
+          <h2>Excercise Entry</h2>
+          <form onSubmit={handleSubmit} className='excerciseForm'>
+            <label>Muscle Group
+            <select value={currentMuscleInput} onChange={(e)=>setCurrentMuscleInput(e.target.value)}  className='excerciseFormInput'>
+              <option disabled selected value> -- select an option -- </option>
+              <option value="back">Back</option>
+              <option value="cardio">Cardio</option>
+              <option value="chest">Chest</option>
+              <option value="lower arms">Lower Arms</option>
+              <option value="lower legs">Lower Legs</option>
+              <option value="neck">Neck</option>
+              <option value="shoulders">Shoulders</option>
+              <option value="upper arms">Upper Arms</option>
+              <option value="upper legs">Upper Legs</option>
+              <option value="waist">Waist</option>
+            </select>
+          </label>
+          <br/>
+          <br/>
+          <label>Enter Name of Excercise:
+            <input 
+              type="text" 
+              name="excerciseName"
+              className='excerciseFormInput' 
+              value={currentExcerciseInput }
+              onChange={(e)=>setCurrentExcerciseInput(e.target.value)}
+            />
+            </label>
+            <br/>
+            <label>Number of Sets:
+            <input 
+              type='number'
+              name="setsAmount"
+              className='excerciseFormInput'
+              onChange={(e)=>setSetsInput(e.target.value)}
+
+            />
+            </label>
+            <br/>
+
+            <label>Number of Reps per Set:
+            <input 
+              type='number'
+              name="repsAmount" 
+              className='excerciseFormInput'
+              onChange={(e)=>setRepsInput(e.target.value)}
+
+            />
+            </label>
+            <br/>
+
+            <label>Time Spent (in minutes):
+            <input 
+              type='number'
+              name="timeAmount"
+              className='excerciseFormInput'
+              onChange={(e)=>setTimeInput(e.target.value)}
+            />
+            </label>
+            <button className='submitExcercise'>Submit To Workout</button>
+          </form>
+          
       </div>
-      <div className='equipmentSection'>
-          <p className='subtitle'>What Equipment Do You Have Access To Today?</p>
-          <select className='equipmentList'>
-            <option value="assisted">Assisted</option>
-            <option value="band">Band</option>
-            <option value="barbell">Barbell</option>
-            <option value="body weight">Body Weight</option>
-            <option value="bosu ball">Bosu Ball</option>
-            <option value="cable">Cable</option>
-            <option value="dumbbell">Dumbbell</option>
-            <option value="elliptical machine">Elliptical Machine</option>
-            <option value="ez barbell">EZ barbell</option>
-            <option value="hammer">Hammer</option>
-            <option value="kettlebell">Kettlebell</option>
-            <option value="leverage machine">Leverage Machine</option>
-            <option value="medicine ball">Medicine Ball</option>
-            <option value="olympic barbell">Olympic Barbell</option>
-            <option value="resistance band">Resistance Band</option>
-            <option value="roller">Roller</option>
-            <option value="rope">Rope</option>
-            <option value="skierg machine">Skierg Machine</option>
-            <option value="sled machine">Sled Machine</option>
-            <option value="smith machine">Smith Machine</option>
-            <option value="stability ball">Stability Ball</option>
-            <option value="stationary bike">Stationary Bike</option>
-            <option value="stepmill machine">Stepmill Machine</option>
-            <option value="tire">Tire</option>
-            <option value="trap bar">Trap Bar</option>
-            <option value="upper body ergometer">Upper Body Ergometer</option>
-            <option value="weighted">Weighted</option>
-            <option value="wheel roller">Wheel Roller</option>
-          </select>
-      </div>
-      <div className='workoutRecommendationSection'>
+      <div className='workoutSection'>
+          <h2>Workout</h2>
+          {
+          inputworkoutExcercise.map((excercise)=>
+          <div className = 'excerciseInWorkoutListItem'>
+            <div className='buttonWorkoutContainer'>
+            <h3>{excercise.name}</h3>
+            <div className='buttonsOnly'>
+            <button className='editButton' onClick={()=>{
+                 setCurrentExcerciseInput(excercise.name)
+                setCurrentMuscleInput(excercise.muscle)
+                setSetsInput(excercise.sets)
+                setRepsInput(excercise.reps)
+              setTimeInput(excercise.time)
+              setSelectedID(excercise.id)
+            }}>Edit</button>
+            <button className='deleteButton' onClick={()=> {setinputworkoutExcercise(inputworkoutExcercise.filter((currentExcercise)=>currentExcercise.id!=excercise.id))}}>Delete</button>
+            </div>
+            </div>
+            <h4>Muscle Targeted: {excercise.muscle}</h4>
+            <div className='excerciseInputDetails'>
+            <p>Sets: {excercise.sets}</p>
+            <p>Reps: {excercise.reps}</p>
+            <p>Time Spent:{excercise.time}</p>
+            </div>
+
+          </div>
+          )
+          }
+          <br/>
         
+
+        </div> 
       </div>
-    </div>
-  );
+      </div>
+  )
+;
+
+
+
+
+
+//Generates Excercises Based on Both muscle group and equipment
+async function generateExcercises() {
+    let excercises = [];
+    for (let i = 0; i < selectedMuscle.length; i++) {
+      var muscleString = selectedMuscle[i];
+      if(muscleString.includes(" ")){//if muscle group has two words insert '%20' so api call is successful
+        muscleString = muscleString.replace(/ /g,"%20");
+      }
+      for(let k = 0; k < selectedEquipments.length; k++){
+      let response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${muscleString.toLowerCase()}`, excerciseOptions)
+      let data = await response.json()
+      console.log(data)
+          var equipmentString = selectedEquipments[k]; 
+          setexcerciseUserInfo(data);
+          let equipmentfilter;
+          equipmentfilter= data.filter(apiResults => apiResults['equipment'] == equipmentString);
+          let objectArraytoArray = Object.values(equipmentfilter);
+          for(const object of objectArraytoArray){
+            if(!excercises.find((excercise)=>excercise.id==object.id)){
+              excercises.push(object)
+            }
+          }
+        }
+    }
+    setexcercisesArray(excercises);
+    console.log(excercises)
+    console.log('length of Array: '+ excercises.length)
+
+    return excercises;
 }
+}
+
