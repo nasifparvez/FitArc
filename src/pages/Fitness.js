@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {excerciseOptions, FetchDataExcercise} from '../utils/FetchDataExcercise'
-import { muscleGroups } from "../utils/muscleGroups";
-import{ equipment } from '../utils/equipment';
 import ExcerciseCardComponent from "../components/ExcerciseCardComponent";
 import './Fitness.css';
 import EditEquipmentWindow from '../components/EditEquipmentWindow';
@@ -23,7 +21,6 @@ export default function Fitness() {
   const [inputworkoutExcercise, setinputworkoutExcercise] = useState([]);
   const[selectedId, setSelectedID] = useState(null);
 
-  const [inputs, setInputs] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -45,6 +42,7 @@ export default function Fitness() {
       setinputworkoutExcercise(inputworkoutExcercise.map((excercise)=> {
         if(excercise.id==selectedId){
           return {
+            id:excercise.id,
             name:excerciseNameFormatted,
             time:timeInput,
             reps:repsInput,
@@ -55,7 +53,14 @@ export default function Fitness() {
           return excercise;
         }
       }));
+      setSelectedID(null);
     }
+    setCurrentExcerciseInput("")
+    setCurrentMuscleInput("")
+    setSetsInput("")
+    setRepsInput("")
+    setTimeInput("")
+
   }
 
   const handleChangeMuscle = (muscleName) => {
@@ -123,7 +128,10 @@ export default function Fitness() {
         </div>
         <button onClick={() => generateExcercises()}>Submit</button>
         <div className='recommendedWorkoutSection'>
+        <br/>
           <h2>Recommended Workouts For Today</h2>
+          <br/>
+          <br/>
           <div className='cardSection'>
             {excercisesArray.map((excercise)=>
               <ExcerciseCardComponent
@@ -144,6 +152,7 @@ export default function Fitness() {
         <div className='rightSection'>
       <div className='excerciseEntrySection'>
           <h2>Excercise Entry</h2>
+          {selectedId!=null&&(<div>{inputworkoutExcercise.find((excercise)=>excercise.id==selectedId).name}</div>)}
           <form onSubmit={handleSubmit} id='excerciseForm'>
             <label>Muscle Group
             <select value={currentMuscleInput} onChange={(e)=>setCurrentMuscleInput(e.target.value)}  className='excerciseFormInput'>
@@ -178,7 +187,7 @@ export default function Fitness() {
               name="setsAmount"
               className='excerciseFormInput'
               onChange={(e)=>setSetsInput(e.target.value)}
-
+              value={setsInput}
             />
             </label>
             <br/>
@@ -189,17 +198,18 @@ export default function Fitness() {
               name="repsAmount" 
               className='excerciseFormInput'
               onChange={(e)=>setRepsInput(e.target.value)}
-
+              value={repsInput}
             />
             </label>
             <br/>
 
-            <label>Time Spent (in minutes):
+            <label>Time Spent (in minutes) per Set:
             <input 
               type='number'
               name="timeAmount"
               className='excerciseFormInput'
               onChange={(e)=>setTimeInput(e.target.value)}
+              value={timeInput}
             />
             </label>
             <button className='submitExcercise'>Submit To Workout</button>
@@ -210,7 +220,7 @@ export default function Fitness() {
           <h2>Workout</h2>
           {
           inputworkoutExcercise.map((excercise)=>
-          <div className = 'excerciseInWorkoutListItem'>
+          <div className = 'excerciseInWorkoutListItem' style={{backgroundColor:selectedId==excercise.id?'yellow':undefined}}>
             <div className='buttonWorkoutContainer'>
             <h3>{excercise.name}</h3>
             <div className='buttonsOnly'>
@@ -222,7 +232,6 @@ export default function Fitness() {
                 setRepsInput(excercise.reps)
               setTimeInput(excercise.time)
               setSelectedID(excercise.id)
-              console.log(excercise)
             }}>Edit</button>
             <button className='deleteButton' onClick={()=> {setinputworkoutExcercise(inputworkoutExcercise.filter((currentExcercise)=>currentExcercise.id!=excercise.id))}}>Delete</button>
             </div>
@@ -245,10 +254,6 @@ export default function Fitness() {
       </div>
   )
 ;
-
-
-
-
 
 //Generates Excercises Based on Both muscle group and equipment
 async function generateExcercises() {
@@ -276,8 +281,6 @@ async function generateExcercises() {
     }
     setexcercisesArray(excercises);
     console.log(excercises)
-    console.log('length of Array: '+ excercises.length)
-
     return excercises;
 }
 }

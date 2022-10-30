@@ -24,6 +24,11 @@ export default function Navbar() {
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
           <h1 className ='title'>FITARC</h1>
+          <div className="rightHandContainerOptions">
+            <p className="accountSettingsButton">Account Settings</p>
+            <p className="LogOutButton"><Link to='home'>Log Out</Link></p>
+          </div>
+
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>

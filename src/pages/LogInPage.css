@@ -1,0 +1,49 @@
+body{
+    background-color: #898989;
+}
+
+.logInBox{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    padding: 10px;
+    width: 50%;
+    height: 50%;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.logInTitle{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -5%);
+}
+.forgotPassText{
+    margin: auto;
+    width: 50%;
+}
+
+
+.logInForm{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.otherOptionsContainer{
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-25%, -50%);
+}
+
+.directToSignupContainer{
+    display: inline-flex;
+}
+
+.forgotPassText{
+    display: inline-flex;
+}

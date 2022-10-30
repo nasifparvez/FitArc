@@ -91,3 +91,10 @@
         -webkit-text-fill-color: transparent;
 
   }
+
+  .rightHandContainerOptions{
+    display: inline-flex;
+  }
+  .rightHandContainerOptions p{
+    padding-right:60px
+  }

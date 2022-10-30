@@ -1,0 +1,48 @@
+.homeNavBar{
+    background-color: white;
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+
+.mainPagesSection, .signUpLoginButtonContainer{
+    display: inline-flex;
+}
+
+.mainPagesSection{
+    margin-left:45px;
+}
+
+.mainPagesSection p{
+    margin-left:45px;
+}
+
+
+.signUpLoginButtonContainer{
+    float: right;
+    padding-right: 20px;
+}
+.signUpLoginButtonContainer h4{
+    margin-left:45px;
+}
+
+.title{
+    display: inline-block;
+    margin: 0;
+    line-height: 1em;
+   
+    padding-left: 25px;
+    padding-bottom: 5px;
+    letter-spacing: 0.3em;
+    font-weight: bold;
+    background: linear-gradient(to right, #000 50%, #10C051 50%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+  }
+
+.navBtn { text-decoration: none; color:#000; }
+.navBtn:visited { text-decoration: none; color:#000; }
+.navBtn:hover { text-decoration: none; color:#000; }
+.navBtn:focus { text-decoration: none; color:#000; }
+.navBtn:hover, .navBtn:active { text-decoration: none; color:#000; }
