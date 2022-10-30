@@ -25,17 +25,10 @@ function Wrapper(){
   </>)
 
 }
+
 function App() {
   return (
     <div className="App"  >
-      {/* <Router>
-        <HomeNavBar/>
-        <Routes>
-          <Route  path="/" element={<HomePage />} />
-          <Route path="/login" element={<LogInPage />} />
-          <Route path="/signup" element={<SignupPage />} />
-        </Routes>
-      </Router> */}
       <Router>
         <Routes>
           <Route path="*" element={<Wrapper />} />
