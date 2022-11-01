@@ -7,10 +7,15 @@
 }
 
 .profile,
-.nutrition,
 .fitness {
   height: 90vh;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
 }
+
+.link { text-decoration: none; color: black;}
+.link:visited { text-decoration: none;  color: black; }
+.link:hover { text-decoration: none;  color: black; }
+.link:focus { text-decoration: none;   color: black;}
+.link:hover, a:active { text-decoration: none;  color: black;}

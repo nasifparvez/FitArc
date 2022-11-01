@@ -7,7 +7,7 @@ import * as GiIcons from "react-icons/gi";
 export const NavSideBarData = [
   {
     title: "Profile",
-    path: "/",
+    path: "/profile",
     icon: <AiIcons.AiOutlineUser />,
     cName: "nav-text"
   },

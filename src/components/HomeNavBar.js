@@ -8,14 +8,14 @@ function HomeNavBar() {
     <nav className='homeNavBar'>
         <h1 className ='title'>FITARC</h1>
         <div className='mainPagesSection'>
-            <p className='navBtn'><Link to='/'>Home</Link></p>
+            <p className='navBtn'><Link to='/' className="link">Home</Link></p>
             <p className='navBtn'>Features</p>
             <p className='navBtn'>Nutrition</p>
             <p className='navBtn'>Fitness</p>
         </div>
         <div className='signUpLoginButtonContainer'>
-            <h4 className='navBtn'><Link to='/login'>Log In</Link></h4>
-            <h4 className='navBtn'><Link to='/signup'>Sign Up</Link></h4>
+            <h4 className='navBtn'><Link to='/login' className="link">Log In</Link></h4>
+            <h4 className='navBtn'><Link to='/signup' className="link">Sign Up</Link></h4>
         </div>
     </nav>
   )

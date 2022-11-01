@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-export default function Meal({meal, addedMealsTracker}) {
+export default function Meal({meal, addUserMeal}) {
   const [imageUrl, setImageUrl] = useState("");
   const [mealCal, setMealCal] = useState(0);
   const [mealFat, setMealFat] = useState(0);
@@ -12,10 +12,6 @@ export default function Meal({meal, addedMealsTracker}) {
       'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
     }
   };
-
-  function mealsEaten() {
-
-  }
 
   useEffect(() => {
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${meal.id}/information?includeNutrition=true`, options
@@ -33,9 +29,9 @@ export default function Meal({meal, addedMealsTracker}) {
 
 
   return ( 
-  <article>
+  <article className="meal-card">
     <h1>{meal.title}</h1>
-    <img src={imageUrl} alt="recipe" />
+    <img className="meal-img" src={imageUrl} alt="recipe" />
     <ul className='instructions'>
       <li>Preparation time: {meal.readyInMinutes} minutes</li>
       <li>Number of servings: {meal.servings} </li>
@@ -43,8 +39,9 @@ export default function Meal({meal, addedMealsTracker}) {
       <li>Fat: {mealFat}g</li>
     </ul>
 
-    <a href={meal.sourceUrl} target="_blank" rel="noopener noreferrer">Go to Recipe</a>
-    <button onClick={console.log("meal was clicked")}>Add to Meal MealsEaten</button>  
+    <a className="link-text" href={meal.sourceUrl} target="_blank" rel="noopener noreferrer">Go to Recipe</a>
+    <button className="btn-check" onClick={()=>{addUserMeal(meal)}
+                    }>Add to Meal MealsEaten</button>  
 
   </article>
   

@@ -26,7 +26,7 @@ export default function Navbar() {
           <h1 className ='title'>FITARC</h1>
           <div className="rightHandContainerOptions">
             <p className="accountSettingsButton">Account Settings</p>
-            <p className="LogOutButton"><Link to='home'>Log Out</Link></p>
+            <p className="LogOutButton"><Link to='/' className="link">Log Out</Link></p>
           </div>
 
         </div>

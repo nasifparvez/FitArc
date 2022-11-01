@@ -156,7 +156,7 @@ export default function Fitness() {
           <form onSubmit={handleSubmit} id='excerciseForm'>
             <label>Muscle Group
             <select value={currentMuscleInput} onChange={(e)=>setCurrentMuscleInput(e.target.value)}  className='excerciseFormInput'>
-              <option disabled selected value> -- select an option -- </option>
+              <option disabled  value> -- select an option -- </option>
               <option value="back">Back</option>
               <option value="cardio">Cardio</option>
               <option value="chest">Chest</option>
@@ -214,7 +214,6 @@ export default function Fitness() {
             </label>
             <button className='submitExcercise'>Submit To Workout</button>
           </form>
-          
       </div>
       <div className='workoutSection'>
           <h2>Workout</h2>
@@ -240,15 +239,16 @@ export default function Fitness() {
             <div className='excerciseInputDetails'>
             <p>Sets: {excercise.sets}</p>
             <p>Reps: {excercise.reps}</p>
-            <p>Time Spent:{excercise.time}</p>
+            <p>Time Spent Per Set: {excercise.time} mins</p>
             </div>
 
           </div>
           )
           }
+          <button onClick={()=>{
+            console.log("this is an array of the workouts listed",inputworkoutExcercise)
+          }}>Submit Workout List</button>
           <br/>
-        
-
         </div> 
       </div>
       </div>
