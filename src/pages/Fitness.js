@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {excerciseOptions, FetchDataExcercise} from '../utils/FetchDataExcercise'
+import React, { useState } from 'react';
+import {excerciseOptions} from '../utils/FetchDataExcercise'
 import ExcerciseCardComponent from "../components/ExcerciseCardComponent";
 import './Fitness.css';
 import EditEquipmentWindow from '../components/EditEquipmentWindow';
@@ -264,7 +264,7 @@ async function generateExcercises() {
         muscleString = muscleString.replace(/ /g,"%20");
       }
       for(let k = 0; k < selectedEquipments.length; k++){
-      let response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${muscleString.toLowerCase()}`, excerciseOptions)
+      let response = await fetch(`https://${excerciseOptions.headers['X-RapidAPI-Host']}/exercises/bodyPart/${muscleString.toLowerCase()}`, excerciseOptions)
       let data = await response.json()
       console.log(data)
           var equipmentString = selectedEquipments[k]; 
@@ -280,7 +280,6 @@ async function generateExcercises() {
         }
     }
     setexcercisesArray(excercises);
-    console.log(excercises)
     return excercises;
 }
 }

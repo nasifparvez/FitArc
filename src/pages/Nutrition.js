@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import AddList from '../utils/AddList';
-import MealList from "../utils/MealList";
+import AddList from '../components/AddList';
+import MealList from "../components/MealList";
 import "./Nutrition.css"
 
 export default function Nutrition() {
