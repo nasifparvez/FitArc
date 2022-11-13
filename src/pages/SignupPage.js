@@ -105,11 +105,11 @@ function SignupPage() {
           type="checkbox"
           id="dietOption"
           name="dietOption"
-          value="vegitarian"
+          value="Vegetarian"
           // checked={isChecked}
           // onChange={handleOnChange}
         />
-        Vegitarian
+        Vegetarian
       </div>
       <div className="dietOption">
         <input
