@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {excerciseOptions} from '../utils/FetchDataExcercise'
 import ExcerciseCardComponent from "../components/ExcerciseCardComponent";
 import './Fitness.css';
@@ -266,7 +266,6 @@ async function generateExcercises() {
       for(let k = 0; k < selectedEquipments.length; k++){
       let response = await fetch(`https://${excerciseOptions.headers['X-RapidAPI-Host']}/exercises/bodyPart/${muscleString.toLowerCase()}`, excerciseOptions)
       let data = await response.json()
-      console.log(data)
           var equipmentString = selectedEquipments[k]; 
           setexcerciseUserInfo(data);
           let equipmentfilter;

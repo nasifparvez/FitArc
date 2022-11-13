@@ -1,0 +1,14 @@
+.signupContainer{
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: white;
+}
+.signupTitle{
+    text-align: center;
+}
+

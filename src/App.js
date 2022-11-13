@@ -9,6 +9,7 @@ import {Routes,Route,HashRouter  as Router,  useLocation} from 'react-router-dom
 import Profile from './pages/Profile'
 import Nutrition from './pages/Nutrition'
 import Fitness from './pages/Fitness'
+import AccountSettings from './pages/AccountSettings';
 
 function Wrapper(){
   const location = useLocation();
@@ -18,6 +19,7 @@ function Wrapper(){
     <Route  path="/profile" element={<Profile />} />
     <Route path="/nutrition" element={<Nutrition />} />
     <Route path="/fitness" element={<Fitness />} />
+    <Route path ='/accountsettings' element={<AccountSettings/>}></Route>
     <Route  path="/" element={<HomePage />} />
     <Route path="/login" element={<LogInPage />} />
     <Route path="/signup" element={<SignupPage />} />

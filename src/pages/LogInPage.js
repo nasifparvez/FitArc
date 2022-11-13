@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import './LogInPage.css'
 import {Link} from 'react-router-dom'
@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 
 function LogInPage() {
   const navigate = useNavigate();
+
   return (
     <div>
         <div className='logInBox'>
