@@ -7,6 +7,7 @@ import FitnessEquipmentList from '../components/FitnessEquipmentList';
 import FitnessMuscleList from '../components/FitnessMuscleList';
 
 export default function Fitness() {
+  var todayDate = new Date().toISOString().slice(0, 10);
   const [excercisesArray, setexcercisesArray] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [excerciseUserInfo, setexcerciseUserInfo] = useState(null);
@@ -17,10 +18,64 @@ export default function Fitness() {
   const [setsInput, setSetsInput] = useState("");
   const [repsInput, setRepsInput] = useState("");
   const [timeInput, setTimeInput] = useState("");
+  const [records, setRecords] = useState([]);
+
 
   const [inputworkoutExcercise, setinputworkoutExcercise] = useState([]);
   const[selectedId, setSelectedID] = useState(null);
 
+  useEffect(() => {
+    async function getRecords(){
+      const response = await fetch('http://localhost:5000/users/');
+
+      if (!response.ok){
+        const message = `An error occured: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const records = await response.json();
+      setRecords(records);
+    }
+
+    getRecords();
+
+    return;
+  }, [records.length])
+
+  //This method will get the frequently used equipment of the user
+   function getFrequentlyUsedEquipment(){
+    var equipments = records.FrequentlyUsedEquipments;
+  }
+  //This method will get the activity level of the user and recommended amount of sets
+  function getActivityLevel(){
+    var activityLevel = records.activityLevel;
+    var weeklySets;
+    var recommendedDailySetsPerExcercise;
+    if(activityLevel=="sedentary"){
+      weeklySets = 5; 
+      recommendedDailySetsPerExcercise = weeklySets;
+    }else if(activityLevel=="light"){
+      weeklySets = 10; 
+      recommendedDailySetsPerExcercise = weeklySets/3;
+
+    }else if(activityLevel=="moderate"){
+      weeklySets = 15; 
+      recommendedDailySetsPerExcercise = weeklySets/4;
+    }else if(activityLevel=="active"){
+      weeklySets = 20; 
+      recommendedDailySetsPerExcercise = weeklySets/5;
+    }else if(activityLevel=="very active"){
+      weeklySets = 25; 
+      recommendedDailySetsPerExcercise = weeklySets/7;
+
+    }else if(activityLevel=="extra active"){
+      weeklySets = 30; 
+      recommendedDailySetsPerExcercise = weeklySets/7;
+    }
+    console.log(recommendedDailySetsPerExcercise);
+    return(recommendedDailySetsPerExcercise)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -1,4 +1,3 @@
-
 class WorkoutLogDAO {
   id = 0;
   userId= 0;
@@ -20,7 +19,7 @@ class WorkoutLogDAO {
     this.sets = sets;
     this.muscle = muscle;
     this.time = time;
-    this.date = JSON.stringify(date);;
+    this.date = JSON.stringify(date);
   }
 }
 

@@ -81,7 +81,7 @@ function SignupPage() {
               <option value="moderate">Moderate: Exercise 4-5x per week</option>
               <option value="active">Active: Daily Excercise or Intense Excercise 3-4x per Week</option>
               <option value="very active">Very Active: Intense Excercise </option>
-              <option value="extra active">Lose 0.25 kg weekly</option>
+              <option value="extra active">Extra Active: Very Intense Daily Excercise</option>
         </select>
         <br/>
       <label>Enter Allergens (seperate by commas):</label>
