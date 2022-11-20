@@ -24,6 +24,8 @@ export default function Fitness() {
   const [inputworkoutExcercise, setinputworkoutExcercise] = useState([]);
   const[selectedId, setSelectedID] = useState(null);
 
+  var userActivityLevel;
+  var userFrequentlyUsed;
   useEffect(() => {
     async function getRecords(){
       const response = await fetch('http://localhost:5000/users/');
@@ -36,47 +38,19 @@ export default function Fitness() {
 
       const records = await response.json();
       setRecords(records);
+      console.log("success");
+      userActivityLevel = records[1].activityLevel;
+      userFrequentlyUsed = records[1].frequentEquipment;
+      console.log(userActivityLevel,userFrequentlyUsed)
     }
 
     getRecords();
 
     return;
-  }, [records.length])
+  }, [records.length]);
 
-  //This method will get the frequently used equipment of the user
-   function getFrequentlyUsedEquipment(){
-    var equipments = records.FrequentlyUsedEquipments;
-  }
-  //This method will get the activity level of the user and recommended amount of sets
-  function getActivityLevel(){
-    var activityLevel = records.activityLevel;
-    var weeklySets;
-    var recommendedDailySetsPerExcercise;
-    if(activityLevel=="sedentary"){
-      weeklySets = 5; 
-      recommendedDailySetsPerExcercise = weeklySets;
-    }else if(activityLevel=="light"){
-      weeklySets = 10; 
-      recommendedDailySetsPerExcercise = weeklySets/3;
-
-    }else if(activityLevel=="moderate"){
-      weeklySets = 15; 
-      recommendedDailySetsPerExcercise = weeklySets/4;
-    }else if(activityLevel=="active"){
-      weeklySets = 20; 
-      recommendedDailySetsPerExcercise = weeklySets/5;
-    }else if(activityLevel=="very active"){
-      weeklySets = 25; 
-      recommendedDailySetsPerExcercise = weeklySets/7;
-
-    }else if(activityLevel=="extra active"){
-      weeklySets = 30; 
-      recommendedDailySetsPerExcercise = weeklySets/7;
-    }
-    console.log(recommendedDailySetsPerExcercise);
-    return(recommendedDailySetsPerExcercise)
-  }
-
+  
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const excerciseNameFormatted = currentExcerciseInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -117,6 +91,29 @@ export default function Fitness() {
     setTimeInput("")
 
   }
+
+  function frequentlyUsedEquipments(){
+
+  }
+
+  function recommendedSetsFunction(){
+    var recommendedSets;
+    var weeklySets;
+    if(userActivityLevel=='sedentary'){
+      weeklySets = 5;
+    }else if(userActivityLevel=='light'){
+      weeklySets = 10;
+    }else if(userActivityLevel=='moderate'){
+      weeklySets = 20;
+    }else if(userActivityLevel=='active'){
+      weeklySets = 30;
+    }else if(userActivityLevel=='very active'){
+      weeklySets = 35;
+    }else if(userActivityLevel=='extra active'){
+      weeklySets = 40;
+    }
+  }
+
 
   const handleChangeMuscle = (muscleName) => {
     const clicked = selectedMuscle.includes(muscleName);
