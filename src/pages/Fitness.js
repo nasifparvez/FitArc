@@ -50,7 +50,14 @@ export default function Fitness() {
   }, [records.length]);
 
   
-  
+  const submitWorkoutList = async (event) =>{
+    for(const workout of inputworkoutExcercise){
+    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:Date.now()}), headers:{"content-type": "application/json"}})
+  }
+    
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const excerciseNameFormatted = currentExcerciseInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -89,11 +96,11 @@ export default function Fitness() {
     setSetsInput("")
     setRepsInput("")
     setTimeInput("")
-
   }
 
-  function frequentlyUsedEquipments(){
 
+  function frequentlyUsedEquipments(){
+    
   }
 
   function recommendedSetsFunction(){
@@ -146,7 +153,6 @@ export default function Fitness() {
         selectedEquipments.filter((e) => e !== equipmentName),
       );
     }
-
   };
 
   return (
@@ -299,6 +305,7 @@ export default function Fitness() {
           }
           <button onClick={()=>{
             console.log("this is an array of the workouts listed",inputworkoutExcercise)
+            submitWorkoutList()
           }}>Submit Workout List</button>
           <br/>
         </div> 

@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import React, { useEffect } from 'react'
 
 // const addedMeals = [{title : "apple pie"}, {title: "steak"}];
+var totCal = 0;
 
 class AddList extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class AddList extends React.Component {
     };
   }
 
+
   getMealCal(meal) {
     // let nutrients = this.mealData.filter((m) => m.id == meal.id)[0].nutrients
     console.log(this.mealData)
@@ -27,6 +29,17 @@ class AddList extends React.Component {
     // let nutrients = this.mealData.filter((m) => m.id == meal.id)[0].nutrients
     return 0
   }
+  getMealCarb(meal) {
+    return 0
+  }
+  getTotCal() {
+    this.userAddedMeals.forEach(meal =>{
+      totCal = totCal + meal.calories
+      console.log(meal)
+    })
+    return totCal
+  }
+
 
   render() {
     this.userAddedMeals.forEach(meal => {
@@ -34,16 +47,20 @@ class AddList extends React.Component {
     });
 
     return (
+      <div>
+        <h2>Meals Eaten</h2>
+        <h3>Total Calories: {this.getTotCal().toFixed(2)}</h3>
         <div className="mealInfo">
             {this.userAddedMeals.map((meal) => {
-              return <li key={meal.title}>Name: {meal.title}: <br/>
-              Cal:{meal.calories}kcal, <br/>Fat: {meal.fat}g</li>
+              return <li key={meal.title}>Name: <br/> {meal.title} <br/>
+              Cal: {meal.calories}  <br/>Fat: {meal.fat}g <br/></li>
             })}
+        </div>
         </div>
     )
   }
   }
-  
+
   export default AddList
 
 

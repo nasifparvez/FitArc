@@ -23,7 +23,9 @@ const postWorkouts = async (req, res, next)=>{
     name: req.body?.name,
     reps: req.body?.reps,
     sets: req.body?.sets,
-    date: req.body?.date
+    date: req.body?.date,
+    //userId: req.body?.userId,
+
   });
   const result = await db_connect
     .collection("workoutLog")

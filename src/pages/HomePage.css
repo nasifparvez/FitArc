@@ -2,10 +2,30 @@ body{
     background-color: #F1EFEF;
 }
 .mainTitle{
-    position: absolute;
-    left: 30%;
-    top: 50%;
-    transform: translate(-30%, -50%);
     font-size: 1.8rem;
     color:#707070;
+    display: flex 1 1 auto;;
+    flex-direction: column;
+    align-self: center;
+    padding-top: 100px;
+    height: calc(100vh - 69px);
 }
+
+.banner-hero {
+    flex: 1;
+    align-self: center;
+    max-width: 50%;
+    border:1px solid red;
+    text-align: center;
+    display: inline-block;
+  }
+
+
+  .homepageContainer{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .featuresSection, .nutritionSection,.fitnessSection{
+    height: 600px;
+  }
