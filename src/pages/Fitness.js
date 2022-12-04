@@ -7,7 +7,7 @@ import FitnessEquipmentList from '../components/FitnessEquipmentList';
 import FitnessMuscleList from '../components/FitnessMuscleList';
 
 export default function Fitness() {
-  var todayDate = new Date().toISOString().slice(0, 10);
+  var todaysDate = new Date().toISOString().slice(0, 10);
   const [excercisesArray, setexcercisesArray] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [excerciseUserInfo, setexcerciseUserInfo] = useState(null);
@@ -52,9 +52,8 @@ export default function Fitness() {
   
   const submitWorkoutList = async (event) =>{
     for(const workout of inputworkoutExcercise){
-    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:Date.now()}), headers:{"content-type": "application/json"}})
+    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:todaysDate}), headers:{"content-type": "application/json"}})
   }
-    
   }
 
 
