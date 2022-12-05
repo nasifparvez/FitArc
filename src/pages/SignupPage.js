@@ -6,15 +6,15 @@ function SignupPage() {
     <div className='signupContainer'>
       <h1 className='signupTitle'>Sign Up</h1>
       <br/>
-      <form>
-      <input type='text' placeholder='First Name' id='firstNameEntry'></input>
-      <input type='text' placeholder='Last Name' id='lastNameEntry'></input>
+      <form method='POST' action="http://localhost:5000/users/add">
+      <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry'></input>
+      <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry'></input>
       <br/>
       <input type='number' placeholder='Age' id='ageEntry'></input>
       <br/>
-      <input type='email' placeholder='email' id='emailEntry'></input>
+      <input type='email' name='email' placeholder='email' id='emailEntry'></input>
       <br/>
-      <input type='password' placeholder='password' id='emailEntry'></input>
+      <input type='password' placeholder='password' name='password' id='emailEntry'></input>
       <br/>
       <br/>
 
@@ -24,7 +24,7 @@ function SignupPage() {
             <input
               type="radio"
               value="Male"
-
+              name='gender'
             />
             Male
       </label>
@@ -32,39 +32,22 @@ function SignupPage() {
             <input
               type="radio"
               value="Female"
-
+              name='gender'
             />
             Female
       </label>
       </div>
       <br/>
-      <div className='measurementEntry'>
-      <label>Measurement System:</label>
-      <label>
-            <input
-              type="radio"
-              value="metric"
-            />
-            Metric
-      </label>
-      <label>
-            <input
-              type="radio"
-              value="imperial"
-            />
-            Imperial
-      </label>
-      </div>
       <br/>
       <label>Height:</label>
-      <input type='text' placeholder='Feet'></input>
-      <input type='text' placeholder='Inches'></input>
+      <input type='text' placeholder='Feet' name='feetHeight'></input>
+      <input type='text' placeholder='Inches' name='inchesHeight'></input>
       <br/>
       <label>Weight:</label>
-      <input type='text' placeholder='Pounds'></input>
+      <input type='text' placeholder='Pounds' name='weight'></input>
       <br/>
       <label>Select Body Goal</label>
-      <select>
+      <select name='goal'>
               <option value="gain 1kg a week">Gain 1kg weekly</option>
               <option value="gain .5kg a week">Gain 0.5 kg weekly</option>
               <option value="gain .25kg a week">Gain 0.25 kg weekly</option>
@@ -75,7 +58,7 @@ function SignupPage() {
         </select>
         <br/>
       <label>Select Activity Level</label>
-      <select>
+      <select name='activityLevel'>
               <option value="sedentary">Sedentary: Little to No Excercise</option>
               <option value="light">Light: Excercise 1-3x per week</option>
               <option value="moderate">Moderate: Exercise 4-5x per week</option>
@@ -85,7 +68,7 @@ function SignupPage() {
         </select>
         <br/>
       <label>Enter Allergens (seperate by commas):</label>
-      <input type='text'></input>
+      <input type='text' name='allergens'></input>
       <br/>
       <label>Enter Diet:</label>
       <div className='dietOptionSection'>
@@ -213,7 +196,7 @@ function SignupPage() {
           </div>
           <br/>
           <label>Frequently Used Equipment:</label>
-          <ul className="equipmentList">
+          <ul className="equipmentList" name='frequentEquipment'>
           {equipment.map(({name}, index) =>{
             return(
               <li key={index}>
@@ -228,7 +211,7 @@ function SignupPage() {
 
           })}
           </ul>
-          <button className='signupButton'>Sign Up</button>
+          <button className='signupButton' type='submit'>Sign Up</button>
 
       </form>
     </div>

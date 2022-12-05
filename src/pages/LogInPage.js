@@ -1,23 +1,35 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { json, useNavigate } from 'react-router-dom'
 import './LogInPage.css'
 import {Link} from 'react-router-dom'
 
 
 function LogInPage() {
   const navigate = useNavigate();
+const [email, setEmail]=useState("");
+const [password, setPassword]=useState("");
 
   return (
     <div>
         <div className='logInBox'>
         <h1 className ='logInTitle'>Log In</h1>
-            <form className ='logInForm'>
-                <input type= 'text' placeholder = 'Username'></input>
+            <div className ='logInForm'>
+                <input type= 'text' name = 'email'placeholder = 'email' value={email} onChange={(e)=>setEmail(e.target.value)}></input>
                 <br/>
-                <input type= 'password' placeholder = 'Password' ></input>
+                <input type= 'password'name = 'password' placeholder = 'Password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
                 <br/>
-                <button onClick={()=>{navigate("/profile")}}>Log In</button>
-            </form>
+                <button onClick={async ()=>{
+                  const response = await fetch("http://localhost:5000/users/login",{method:"POST", body:JSON.stringify({email,password}),headers:{"content-type": "application/json"}})
+                  if(!response.ok){
+                    alert("Bad log in")
+                    return;
+                  }
+                  var user = await response.json();
+                  localStorage.setItem("firstName", user.firstName)
+                  localStorage.setItem("userId", user._id)
+                  console.log(user)
+                  navigate("/profile")}}>Log In</button>
+            </div>
             <div className='otherOptionsContainer'>
                 <p className = 'forgotPassText'>Forgot Password</p>
                 <div className ='directToSignupContainer'><p>No Account?</p><button><Link to='/signup'>Sign Up</Link></button></div>

@@ -56,7 +56,7 @@ export default function Fitness() {
   }
   }
 
-
+//Sends individual Excercise to input into workout list and allows for edits
   const handleSubmit = (event) => {
     event.preventDefault();
     const excerciseNameFormatted = currentExcerciseInput.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
@@ -120,7 +120,7 @@ export default function Fitness() {
     }
   }
 
-
+//Checks if equipment list is checked or unchecked
   const handleChangeMuscle = (muscleName) => {
     const clicked = selectedMuscle.includes(muscleName);
     console.log('this is: '+ clicked,muscleName );
@@ -137,6 +137,7 @@ export default function Fitness() {
     }
   };
   
+  //Sends equipment to the equipment array
   const handleChangeEquipment = (equipmentName) => {
     //Does the selected equipment include the click equipment item
     const clicked = selectedEquipments.includes(equipmentName);
@@ -280,6 +281,7 @@ export default function Fitness() {
             <div className='buttonWorkoutContainer'>
             <h3>{excercise.name}</h3>
             <div className='buttonsOnly'>
+              {/*Edit Excercise In List Button*/}
             <button className='editButton' 
             onClick={()=>{
                  setCurrentExcerciseInput(excercise.name)
@@ -289,7 +291,9 @@ export default function Fitness() {
               setTimeInput(excercise.time)
               setSelectedID(excercise.id)
             }}>Edit</button>
-            <button className='deleteButton' onClick={()=> {setinputworkoutExcercise(inputworkoutExcercise.filter((currentExcercise)=>currentExcercise.id!=excercise.id))}}>Delete</button>
+            {/*Delete Excercise In List Button*/}
+            <button className='deleteButton' onClick={()=> {setinputworkoutExcercise(inputworkoutExcercise.filter((currentExcercise)=>currentExcercise.id!=excercise.id)
+              )}}>Delete</button>
             </div>
             </div>
             <h4>Muscle Targeted: {excercise.muscle}</h4>

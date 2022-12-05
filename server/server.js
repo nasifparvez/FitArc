@@ -3,7 +3,7 @@ require("dotenv").config({ path: "./config.env" }); // load config file (will ma
 const app = express();
 const cors = require("cors");
 const routes = require("./routes");
-
+const bodyParser = require('body-parser');
 // Get driver connection
 const dbo = require("./db/conn");
 const port = process.env.PORT || 5000; // PORT=VALUE is one line of your .env file
@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000; // PORT=VALUE is one line of your .env fi
 // Server App Settings Middleware
 app.use(cors()); // Because you cannot use send a request from same domain (everything is on localhost when working locally)
 app.use(express.json());
-
+app.use(bodyParser.urlencoded({extended:false}));
 
 // Add routes to the Server App
 //app.get("/human", (req, res, next)  => res.json({id: 8, name: "Tst"}));

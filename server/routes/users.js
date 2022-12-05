@@ -32,14 +32,37 @@ usersRouter.get("/:id", function (req, res) {
      res.json(result);
    });
 });
- 
+usersRouter.post("/login", function (req, response) {
+  let db_connect = dbo.getDb();
+ let myquery = { email:req.body.email };
+ db_connect
+   .collection("user")
+   .findOne(myquery, function (err, result) {
+     if (err) throw err;
+     if(result==null){
+      console.log("user not found", req.body.email)
+      return response.sendStatus(404)
+     }
+     if(result.password!=req.body.password){console.log("bad password");
+     return response.sendStatus(401)
+    }
+     response.json(result);
+   });
+})
 // This section will help you create a new users.
 usersRouter.post("/add", function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
-   name: req.body.name,
+   firstName: req.body.firstName,
+   lastName: req.body.lastName,
    email: req.body.email,
-   level: req.body.level,
+   password: req.body.password,
+   activityLevel: req.body.activityLevel,
+   gender:req.body.gender,
+   goal:req.body.goal,
+   allergens:req.body.allergens,
+   dietOption:req.body.dietOption,
+   frequentEquipment:req.body.frequentEquipment
  };
  db_connect.collection("user").insertOne(myobj, function (err, res) {
    if (err) throw err;

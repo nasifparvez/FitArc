@@ -12,8 +12,18 @@ const getUsers = async (req, res) => {
     });
  }
 
+ const postUsers = async (req, res, next)=>{
+  const db_connect = dbo.getDb("FitArc");
+  console.log(req)
+  const result = await db_connect
+    .collection("user")
+    .insertOne({})
+  res.json({result, success: true})
+}
+
  module.exports = {
   getUsers,
-  //other function,
+  postUsers,
   //other function,
  }
+

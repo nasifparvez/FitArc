@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 //const for fetching and displaying name
 const Name = (props) => (
-  <p className='text'> Hello {props.record.name}</p>
+  <p className='text'> Hello {props.record.firstName} {props.record.lastName}</p>
 );
 
 
@@ -14,10 +14,10 @@ export default function Profile() {
   const [date, setDate] = useState(new Date());
   const [records, setRecords] = useState([]);
   // test
-  //This method fetches the records from the database
+  //This method fetches the individual user from the database
   useEffect(() => {
     async function getRecords(){
-      const response = await fetch('http://localhost:5000/users/');
+      const response = await fetch(`http://localhost:5000/users/${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -46,15 +46,13 @@ export default function Profile() {
 
   //this method will display the name
   function displayName(){
-    return records.map((record) => {
       return (
         <Name
-          record={record}
-          deleteRecord={() => deleteRecord(record._id)}
-          key={record._id}
+          record={records}
+          deleteRecord={() => deleteRecord(records._id)}
+          key={records._id}
         />
       );
-    });
   }
   
 

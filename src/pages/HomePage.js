@@ -14,8 +14,10 @@ function HomePage() {
           Easy
         </h1>
       </div>
-      <div className='featuresSection' >
-        <h2>Features</h2>
+      <div className='featuresSection'>
+        <div>
+          <h1 className='featuresTitle'>Features</h1>
+        </div>
       </div>
       <div className='nutritionSection'>
         <h2>Our Nutrition Page</h2>
