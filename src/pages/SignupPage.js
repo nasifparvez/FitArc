@@ -1,12 +1,16 @@
 import React from 'react'
 import './SignupPage.css'
 import{ equipment } from '../utils/equipment';
+import { useNavigate } from "react-router";
 function SignupPage() {
+  const navigate = useNavigate();
   return (
     <div className='signupContainer'>
       <h1 className='signupTitle'>Sign Up</h1>
       <br/>
-      <form method='POST' action="http://localhost:5000/users/add">
+      <form id='signupForm'onSubmit={(e)=>{
+        e.preventDefault();
+      }}>
       <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry'></input>
       <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry'></input>
       <br/>
@@ -78,8 +82,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="vegan"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Vegan
       </div>
@@ -89,8 +91,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Vegetarian"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Vegetarian
       </div>
@@ -100,8 +100,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Lacto-Vegetarian"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Lacto-Vegetarian  
       </div>
@@ -111,8 +109,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Ovo-Vegetarian"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
       Ovo-Vegetarian
       </div>
@@ -122,8 +118,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Pescatarian"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Pescatarian
         </div>
@@ -133,8 +127,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Ketogenic"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Ketogenic
         </div>
@@ -144,8 +136,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Gluten-free"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
         Gluten-free
         </div>
@@ -155,8 +145,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Paleo"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
           Paleo
           </div>
@@ -166,8 +154,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Primal"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
           Primal
           </div>
@@ -177,8 +163,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Whole30"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
           Whole30
           </div>
@@ -188,8 +172,6 @@ function SignupPage() {
           id="dietOption"
           name="dietOption"
           value="Low FODMAP"
-          // checked={isChecked}
-          // onChange={handleOnChange}
         />
           Low FODMAP
           </div>
@@ -211,7 +193,16 @@ function SignupPage() {
 
           })}
           </ul>
-          <button className='signupButton' type='submit'>Sign Up</button>
+          <button className='signupButton'onClick={async ()=>{
+            var form = document.getElementById("signupForm")
+            var formData = new FormData(form)
+            var response = await fetch("http://localhost:5000/users/add",{body:new URLSearchParams(formData).toString(), method:"POST", headers:{"content-type":"application/x-www-form-urlencoded"}})
+            if(!response.ok){
+              alert("improper sign up ")
+              return
+            }
+            navigate("/login")
+          }}>Sign Up</button>
 
       </form>
     </div>

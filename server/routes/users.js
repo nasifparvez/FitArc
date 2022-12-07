@@ -52,6 +52,7 @@ usersRouter.post("/login", function (req, response) {
 // This section will help you create a new users.
 usersRouter.post("/add", function (req, response) {
  let db_connect = dbo.getDb();
+ console.log(req.body);
  let myobj = {
    firstName: req.body.firstName,
    lastName: req.body.lastName,
