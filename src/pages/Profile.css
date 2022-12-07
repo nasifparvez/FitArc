@@ -266,19 +266,32 @@ th{
       "Calendar Calendar Journal";
 }
   
-.Calendar { grid-area: Calendar; }
-  
-.Journal { grid-area: Journal; }
-  
-.Avatar { grid-area: Avatar; }
-  
-.Name { grid-area: Name; }
-
-.centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+.Calendar { 
+    grid-area: Calendar; 
+    justify-self: center; 
+    align-self: end
 }
+  
+.Journal { 
+    grid-area: Journal;
+    justify-self: stretch; 
+    align-self: end;
+}
+  
+.Avatar { 
+    grid-area: Avatar;
+    justify-self: center; 
+    align-self: center;
+}
+  
+.Name { 
+    grid-area: Name;
+    justify-self: start; 
+    align-self: center;
+}
+
+.Avatar img{
+    height: 200px;
+}
+
   
