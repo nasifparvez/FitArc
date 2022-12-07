@@ -37,7 +37,6 @@
 }
 
 
-
 /* react calendar */
 
 
@@ -173,7 +172,7 @@
 }
 
 /* Profile image */
-.image{
+/* .image{
     display:flex;
     width:200px;
     height: 200px;
@@ -181,6 +180,7 @@
     border-radius: 50%;
     grid-column: 1 / span 1;
 }
+
 
 .calendar-container{
     grid-row: 2;
@@ -193,7 +193,7 @@
 }
 
 .text{
-    margin-left: 300px;
+    margin-left: -1200px;
 }
 
 .profile{
@@ -206,10 +206,47 @@
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
+} */
+
+
+/* 2nd try */
+
+/*.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
 }
 
 
+.left {
+    left: 0;
+    
+}
 
+
+.right {
+    right: 0;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.centered img{
+    width:200px;
+    height:200px;
+    border-radius: 50%;
+} */
+
+/* 3rd try */
 table{
     border:1px solid black;
     border-radius: 25px;
@@ -217,4 +254,31 @@ table{
 }
 th{
     border-bottom: medium solid black;
+} 
+
+.container {  display: grid;
+    grid-template-columns: 1fr 0.8fr 1.2fr;
+    grid-template-rows: 1fr 1.7fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Avatar Name Journal"
+      "Calendar Calendar Journal";
 }
+  
+.Calendar { grid-area: Calendar; }
+  
+.Journal { grid-area: Journal; }
+  
+.Avatar { grid-area: Avatar; }
+  
+.Name { grid-area: Name; }
+
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+  
