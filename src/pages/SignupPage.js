@@ -1,16 +1,20 @@
 import React from 'react'
 import './SignupPage.css'
 import{ equipment } from '../utils/equipment';
+import { useNavigate } from 'react-router';
+
+
 function SignupPage() {
+  const navigate = useNavigate();
   return (
     <div className='signupContainer'>
       <h1 className='signupTitle'>Sign Up</h1>
       <br/>
-      <form method='POST' action="http://localhost:5000/users/add">
+      <form method='POST' action="http://localhost:5000/users/add" target="_blank">
       <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry'></input>
       <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry'></input>
       <br/>
-      <input type='number' placeholder='Age' id='ageEntry'></input>
+      <input type='number' name='age' placeholder='Age' id='ageEntry'></input>
       <br/>
       <input type='email' name='email' placeholder='email' id='emailEntry'></input>
       <br/>
@@ -211,7 +215,7 @@ function SignupPage() {
 
           })}
           </ul>
-          <button className='signupButton' type='submit'>Sign Up</button>
+          <button className='signupButton' type='submit' >Sign Up</button>
 
       </form>
     </div>

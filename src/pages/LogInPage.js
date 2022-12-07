@@ -6,8 +6,8 @@ import {Link} from 'react-router-dom'
 
 function LogInPage() {
   const navigate = useNavigate();
-const [email, setEmail]=useState("");
-const [password, setPassword]=useState("");
+  const [email, setEmail]=useState("");
+  const [password, setPassword]=useState("");
 
   return (
     <div>

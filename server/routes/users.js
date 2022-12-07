@@ -55,10 +55,12 @@ usersRouter.post("/add", function (req, response) {
  let myobj = {
    firstName: req.body.firstName,
    lastName: req.body.lastName,
+   age: req.body.age,
    email: req.body.email,
    password: req.body.password,
    activityLevel: req.body.activityLevel,
-   gender:req.body.gender,
+   gender: req.body.gender,
+   weight: req.body.weight,
    goal:req.body.goal,
    allergens:req.body.allergens,
    dietOption:req.body.dietOption,

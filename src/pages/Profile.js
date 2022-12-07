@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css'
 import './Profile.css';
+// import avatar from './avatar.png';
 
 
 //const for fetching and displaying name
 const Name = (props) => (
-  <p className='text'> Hello {props.record.firstName} {props.record.lastName}</p>
+  <p className='text'> Hello {props.record.firstName} {props.record.lastName} <b>Goal</b>: {props.record.goal}</p>
+  
 );
 
 //const for fetching and displaying workouts
@@ -94,47 +96,116 @@ export default function Profile() {
 
   //end test
   return (
-    <div className="profile">
-      <div className='image'>
-        {displayName()}
-      </div>
-      <div className="calendar-container">
-        <Calendar onChange={setDate} value={date}/>
-      </div>
-      <div className="text-center">
-        {/* Selected date: {date.toDateString()} */}
-        <table>
-          <tr>
-            <th>{date.toDateString()} Journal</th>
-          </tr>
-          <tr>
-            <th>Food Eaten</th>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
-          <tr>
-            <th>Exercises Completed</th>
-          </tr>
-          {displayWorkout()}
-          {/* <tr>
-            <td>Pushups</td>
-          </tr><tr>
-            <td>Pushups</td>
-          </tr><tr>
-            <td>Pushup</td>
-          </tr> */}
-          <tr>
-            <th>Weight Today</th>
-          </tr>
-        </table>
-      </div>
+    <div class="container">
+      <div class="Calendar"><Calendar onChange={setDate} value={date}/></div>
+      <div class="Journal"><table>
+            <tr>
+              <th>{date.toDateString()} Journal</th>
+            </tr>
+            <tr>
+              <th>Food Eaten</th>
+            </tr>
+            <tr>
+              <td>Pizza</td>
+            </tr>
+            <tr>
+              <td>Pizza</td>
+            </tr>
+            <tr>
+              <td>Pizza</td>
+            </tr>
+            <tr>
+              <th>Exercises Completed</th>
+            </tr>
+            {displayWorkout()}
+            <tr>
+              <th>Weight Today</th>
+            </tr>
+          </table></div>
+      <div class="Avatar"><img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'/></div>
+      <div class="Name">{displayName()}</div>
     </div>
+    // <div>
+    //   <div class="split left">
+    //     <div class="centered">
+    //       <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'/>
+    //       {displayName()}
+    //     </div>
+    //   </div>
+
+    //   <div class="split right">
+    //     <div class="centered">
+          // <table>
+          //   <tr>
+          //     <th>{date.toDateString()} Journal</th>
+          //   </tr>
+          //   <tr>
+          //     <th>Food Eaten</th>
+          //   </tr>
+          //   <tr>
+          //     <td>Pizza</td>
+          //   </tr>
+          //   <tr>
+          //     <td>Pizza</td>
+          //   </tr>
+          //   <tr>
+          //     <td>Pizza</td>
+          //   </tr>
+          //   <tr>
+          //     <th>Exercises Completed</th>
+          //   </tr>
+          //   {displayWorkout()}
+          //   <tr>
+          //     <th>Weight Today</th>
+          //   </tr>
+          // </table>
+    //     </div>
+    //   </div>
+    // </div>
+    
+
+    // <div className="profile">
+    //   <div className='image'>
+    //     {/* {displayName()} */}
+    //   </div>
+    //   <div>{displayName()}</div>
+    //   <div className="calendar-container">
+    //     <Calendar onChange={setDate} value={date}/>
+    //   </div>
+    //   <div className="text-center">
+    //     {/* Selected date: {date.toDateString()} */}
+        // <table>
+        //   <tr>
+        //     <th>{date.toDateString()} Journal</th>
+        //   </tr>
+        //   <tr>
+        //     <th>Food Eaten</th>
+        //   </tr>
+        //   <tr>
+        //     <td>Pizza</td>
+        //   </tr>
+        //   <tr>
+        //     <td>Pizza</td>
+        //   </tr>
+        //   <tr>
+        //     <td>Pizza</td>
+        //   </tr>
+        //   <tr>
+        //     <th>Exercises Completed</th>
+        //   </tr>
+        //   {displayWorkout()}
+        //   {/* <tr>
+        //     <td>Pushups</td>
+        //   </tr><tr>
+        //     <td>Pushups</td>
+        //   </tr><tr>
+        //     <td>Pushup</td>
+        //   </tr> */}
+        //   <tr>
+        //     <th>Weight Today</th>
+        //   </tr>
+        // </table>
+    //   </div>
+    // </div>
   );
 }
