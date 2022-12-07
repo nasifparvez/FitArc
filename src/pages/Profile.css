@@ -209,52 +209,24 @@
 } */
 
 
-/* 2nd try */
-
-/*.split {
-    height: 100%;
-    width: 50%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-
-.left {
-    left: 0;
-    
-}
-
-
-.right {
-    right: 0;
-}
-
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
-
-.centered img{
-    width:200px;
-    height:200px;
-    border-radius: 50%;
-} */
-
 /* 3rd try */
 table{
     border:1px solid black;
     border-radius: 25px;
     border-spacing: 15px;
+    width: 400px;
+    height: 700px;
+    margin-top: 50px;
+    overflow-y: scroll;
 }
 th{
     border-bottom: medium solid black;
 } 
+
+.tableScroll{
+    height:270px;
+    overflow: auto;
+}
 
 .container {  display: grid;
     grid-template-columns: 1fr 0.8fr 1.2fr;
@@ -269,7 +241,7 @@ th{
 .Calendar { 
     grid-area: Calendar; 
     justify-self: center; 
-    align-self: end
+    align-self: center;
 }
   
 .Journal { 
@@ -282,6 +254,7 @@ th{
     grid-area: Avatar;
     justify-self: center; 
     align-self: center;
+    margin-top: 50px;
 }
   
 .Name { 
@@ -294,4 +267,14 @@ th{
     height: 200px;
 }
 
+.textName{
+    font-size: 30px ;
+}
+.text{
+    font-size: x-large;
+}
+
+ table .setText{
+    font-size: large;
+}
   

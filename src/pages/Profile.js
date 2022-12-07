@@ -7,20 +7,41 @@ import './Profile.css';
 
 //const for fetching and displaying name
 const Name = (props) => (
-  <p className='text'> Hello {props.record.firstName} {props.record.lastName} <b>Goal</b>: {props.record.goal}</p>
+  <div>
+    <p className='textName'> Hello {props.record.firstName} {props.record.lastName} </p>
+    <br></br>
+    <p className='text'><b>Goal</b>: {props.record.goal}</p>
+    <p>Original Weight: {props.record.weight}</p>
+  </div>
+  
   
 );
 
 //const for fetching and displaying workouts
+//&#x2022; adds bullet point
 const Workout = (props) => (
-  <tr><td>{props.workout.name}</td></tr>
+  <tr>
+    <td>&#x2022;   {props.workout.name}<td classname='setText'> - <i>{props.workout.sets}</i> sets of <i>{props.workout.reps}</i> reps</td></td>
+  </tr>
 );
+
+//const for fetching and displaying meals
+//&#x2022; adds bullet point
+const Meals = (props) => (
+  <tr>
+    <td>&#x2022;   {props.meals.foodName}
+      <td classname='setText'> - Cals: <i>{props.meals.calories}</i> P: <i>{props.meals.protein}</i>g C: <i>{props.meals.carbs}</i>g F: <i>{props.meals.fat}g</i></td>
+    </td>
+  </tr>
+);
+
 
 
 export default function Profile() {
   const [date, setDate] = useState(new Date());
   const [records, setRecords] = useState([]);
   const [workouts, setWorkouts] = useState([]);
+  const [meals, setMeals] = useState([]);
   // test
   //This method fetches the individual user from the database
   useEffect(() => {
@@ -42,6 +63,7 @@ export default function Profile() {
     return;
   }, [records.length]);
 
+  //fetch workouts
   useEffect(() => {
     async function getWorkouts(){
       const response = await fetch('http://localhost:5000/workouts/');
@@ -60,6 +82,28 @@ export default function Profile() {
 
     return
   }, [workouts.length]);
+
+
+  //fetch meals
+  useEffect(() => {
+    async function getMeals(){
+      const response = await fetch('http://localhost:5000/meals/');
+
+      if (!response.ok){
+        const message = `An error occured: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const meals = await response.json();
+      setMeals(meals);
+    }
+
+    getMeals();
+
+    return
+  }, [meals.length]);
+
 
   //This method will delete a record
   async function deleteRecord(id){
@@ -92,6 +136,17 @@ export default function Profile() {
       );
     });
   }
+
+  //this method will display the meals
+  function displayMeals(){
+    return meals.map((meal) => {
+      return (
+        <Meals
+          meals={meal}
+        />
+      );
+    });
+  }
   
 
   //end test
@@ -105,19 +160,17 @@ export default function Profile() {
             <tr>
               <th>Food Eaten</th>
             </tr>
-            <tr>
-              <td>Pizza</td>
-            </tr>
-            <tr>
-              <td>Pizza</td>
-            </tr>
-            <tr>
-              <td>Pizza</td>
-            </tr>
+            <div className="tableScroll">
+              {displayMeals()}
+            </div>
+            
             <tr>
               <th>Exercises Completed</th>
             </tr>
-            {displayWorkout()}
+            <div className="tableScroll">
+              {displayWorkout()}
+            </div>
+            
             <tr>
               <th>Weight Today</th>
             </tr>
@@ -125,87 +178,5 @@ export default function Profile() {
       <div class="Avatar"><img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'/></div>
       <div class="Name">{displayName()}</div>
     </div>
-    // <div>
-    //   <div class="split left">
-    //     <div class="centered">
-    //       <img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'/>
-    //       {displayName()}
-    //     </div>
-    //   </div>
-
-    //   <div class="split right">
-    //     <div class="centered">
-          // <table>
-          //   <tr>
-          //     <th>{date.toDateString()} Journal</th>
-          //   </tr>
-          //   <tr>
-          //     <th>Food Eaten</th>
-          //   </tr>
-          //   <tr>
-          //     <td>Pizza</td>
-          //   </tr>
-          //   <tr>
-          //     <td>Pizza</td>
-          //   </tr>
-          //   <tr>
-          //     <td>Pizza</td>
-          //   </tr>
-          //   <tr>
-          //     <th>Exercises Completed</th>
-          //   </tr>
-          //   {displayWorkout()}
-          //   <tr>
-          //     <th>Weight Today</th>
-          //   </tr>
-          // </table>
-    //     </div>
-    //   </div>
-    // </div>
-    
-
-    // <div className="profile">
-    //   <div className='image'>
-    //     {/* {displayName()} */}
-    //   </div>
-    //   <div>{displayName()}</div>
-    //   <div className="calendar-container">
-    //     <Calendar onChange={setDate} value={date}/>
-    //   </div>
-    //   <div className="text-center">
-    //     {/* Selected date: {date.toDateString()} */}
-        // <table>
-        //   <tr>
-        //     <th>{date.toDateString()} Journal</th>
-        //   </tr>
-        //   <tr>
-        //     <th>Food Eaten</th>
-        //   </tr>
-        //   <tr>
-        //     <td>Pizza</td>
-        //   </tr>
-        //   <tr>
-        //     <td>Pizza</td>
-        //   </tr>
-        //   <tr>
-        //     <td>Pizza</td>
-        //   </tr>
-        //   <tr>
-        //     <th>Exercises Completed</th>
-        //   </tr>
-        //   {displayWorkout()}
-        //   {/* <tr>
-        //     <td>Pushups</td>
-        //   </tr><tr>
-        //     <td>Pushups</td>
-        //   </tr><tr>
-        //     <td>Pushup</td>
-        //   </tr> */}
-        //   <tr>
-        //     <th>Weight Today</th>
-        //   </tr>
-        // </table>
-    //   </div>
-    // </div>
   );
 }
