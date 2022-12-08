@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fitarc/static/css/main.9673dd3f.css",
+    "main.js": "/fitarc/static/js/main.51d8cbb6.js",
+    "static/media/nutrition.png": "/fitarc/static/media/nutrition.40697c46ef3c63945f53.png",
+    "static/media/features.png": "/fitarc/static/media/features.94cebfb0ded6a1bd4a36.png",
+    "index.html": "/fitarc/index.html",
+    "main.9673dd3f.css.map": "/fitarc/static/css/main.9673dd3f.css.map",
+    "main.51d8cbb6.js.map": "/fitarc/static/js/main.51d8cbb6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9673dd3f.css",
+    "static/js/main.51d8cbb6.js"
+  ]
+}
