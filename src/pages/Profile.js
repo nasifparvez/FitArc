@@ -10,6 +10,8 @@ const Name = (props) => (
 );
 
 
+
+
 export default function Profile() {
   const [date, setDate] = useState(new Date());
   const [records, setRecords] = useState([]);
@@ -33,6 +35,27 @@ export default function Profile() {
 
     return;
   }, [records.length]);
+
+  const [workouts, setWorkouts] = useState([]);
+  useEffect(() => {
+    async function getRecords(){
+      const today = new Date();
+      const response = await fetch(`http://localhost:5000/workouts?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
+
+      if (!response.ok){
+        const message = `An error occured: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+
+      const records = await response.json();
+      setWorkouts(records);
+    }
+
+    getRecords();
+
+    return;
+  }, []);
 
   //This method will delete a record
   async function deleteRecord(id){
@@ -86,13 +109,7 @@ export default function Profile() {
           <tr>
             <th>Exercises Completed</th>
           </tr>
-          <tr>
-            <td>Pushups</td>
-          </tr><tr>
-            <td>Pushups</td>
-          </tr><tr>
-            <td>Pushup</td>
-          </tr>
+         {workouts.map((workout)=><tr><td>{workout.name}</td></tr>)}
           <tr>
             <th>Weight Today</th>
           </tr>

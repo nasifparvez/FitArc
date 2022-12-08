@@ -8,8 +8,8 @@ class WorkoutLogDAO {
   muscle = "";
   date = "";
   constructor({id, userId, name, time, reps, sets, muscle, date}) {
-    if (!id || !name || !time || !reps || !sets || !muscle || !date ) {
-      const currentObject = {id, name, time, reps, sets, muscle,date};
+    if (!id || !name || !time || !reps || !sets || !muscle || !date||!userId ) {
+      const currentObject = {id, name, time, reps, sets, muscle,date,userId};
       throw new Error(`WorkoutLogDAO is missing fields. Current object: ${JSON.stringify(currentObject)}`);
     }
     this.id = id;

@@ -7,14 +7,14 @@ import FitnessEquipmentList from '../components/FitnessEquipmentList';
 import FitnessMuscleList from '../components/FitnessMuscleList';
 
 export default function Fitness() {
-  var todaysDate = new Date().toISOString().slice(0, 10);
+  const today = new Date();
   const [excercisesArray, setexcercisesArray] = useState([]);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [excerciseUserInfo, setexcerciseUserInfo] = useState(null);
   const [selectedEquipments, setSelectedEquipments] = useState([]);
   const [selectedMuscle, setselectedMuscle] = useState([]);
   const [currentExcerciseInput, setCurrentExcerciseInput] =useState("");
-  const [currentMuscleInput, setCurrentMuscleInput] =useState("");
+  const [currentMuscleInput, setCurrentMuscleInput] =useState("Back");
   const [setsInput, setSetsInput] = useState("");
   const [repsInput, setRepsInput] = useState("");
   const [timeInput, setTimeInput] = useState("");
@@ -50,7 +50,7 @@ export default function Fitness() {
   
   const submitWorkoutList = async (event) =>{
     for(const workout of inputworkoutExcercise){
-    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:todaysDate}), headers:{"content-type": "application/json"}})
+    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
   }
   }
 

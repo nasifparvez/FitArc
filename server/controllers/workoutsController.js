@@ -3,10 +3,12 @@ const dbo = require("../db/conn");
 const WorkoutLogDAO = require("../DAO/WorkoutLogDAO.js")
 
 const getWorkouts=async (req, res, next)=>{
+  var date = req.query.date;
+  var userId= req.query.userId;
   const db_connect = dbo.getDb("FitArc");
   db_connect
     .collection("workoutLog")
-    .find({})
+    .find({date,userId})
     .toArray(function (err, result) {
       if (err) throw err;
       res.json(result);
@@ -15,7 +17,7 @@ const getWorkouts=async (req, res, next)=>{
 
 const postWorkouts = async (req, res, next)=>{
   const db_connect = dbo.getDb("FitArc");
-  console.log(req)
+  console.log(req.body)
   const workout = new WorkoutLogDAO({
     id: req.body?.id,
     time: req.body?.time,
@@ -24,8 +26,7 @@ const postWorkouts = async (req, res, next)=>{
     reps: req.body?.reps,
     sets: req.body?.sets,
     date: req.body?.date,
-    //userId: req.body?.userId
-
+    userId: req.body?.userId
   });
   const result = await db_connect
     .collection("workoutLog")
