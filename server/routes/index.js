@@ -7,11 +7,14 @@ const router = express.Router();
 
 const usersRoutes = require("./users.js")
 const workoutsRoutes = require("./workouts.js")
+const mealsRoutes = require("./meals.js");
+
 
  
 // Use child router instances
 router.use("/users", usersRoutes)
 router.use("/workouts", workoutsRoutes)
+router.use("/meals", mealsRoutes)
 
 
 module.exports = router;
