@@ -1,5 +1,4 @@
 
-
 .selected-date {
     margin: 0 auto;
 }
@@ -164,6 +163,7 @@ table{
     height: 700px;
     margin-top: 50px;
     overflow-y: scroll;
+    background-color: white;
 }
 th{
     border-bottom: medium solid black;

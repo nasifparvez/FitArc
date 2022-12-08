@@ -156,6 +156,10 @@ export default function Fitness() {
     <div className="fitnessContainer">
       <div className='leftSection'>
       <h1>Your Workouts</h1>
+      <div className='setsRecommendationSection'>
+        <p>Since your activity level is {records.activityLevel} you should aim for at least {recommendedSetsFunction()} sets for each muscle group per week </p>
+      </div>
+      <br/>
       <div className='muscleGroupSection'>
         <h2>What Muscle Group(s) Do You Want to Focus On Today</h2>
         <FitnessMuscleList
@@ -163,9 +167,10 @@ export default function Fitness() {
         selectedMuscles={selectedMuscle}
         />
         </div>
+        <br/>
         <div className='equipementSection'>
           <div className='equipmentHeader'>
-            <h2>Frequent Equipment Used</h2>
+            <h2>Equipment Used</h2>
             <button className='moreButton' onClick={() => setButtonPopup(true)}>|||||</button>
             <EditEquipmentWindow trigger={buttonPopup}setTrigger={setButtonPopup}> 
               <h3>Choose Equipment</h3>
