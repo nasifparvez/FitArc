@@ -8,12 +8,12 @@ export default function MealList({ mealData, addUserMeal }) {
     return (
       <main className="meal-disp">
         <section className="nutrients">
-          <h1>Your Daily Macros</h1>
+          <h1>Your Macros</h1>
           <ul>
               <li>Calories: {nutrients.calories.toFixed(0)}</li>
-              <li>Carbohydrates: {nutrients.carbohydrates.toFixed(0)}g</li>
-              <li>Fat: {nutrients.fat.toFixed(0)}g</li>
-              <li>Protein: {nutrients.protein.toFixed(0)}g</li>
+              <li>Carbohydrates: {nutrients.carbohydrates.toFixed(0)}</li>
+              <li>Fat: {nutrients.fat.toFixed(0)}</li>
+              <li>Protein: {nutrients.protein.toFixed(0)}</li>
           </ul>
         </section>
 

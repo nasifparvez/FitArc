@@ -46,7 +46,7 @@ function AccountSettings() {
     <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry' value={profile.firstName} onChange={onChange}></input>
     <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry' value={profile.lastName} onChange={onChange}></input>
     <br/>
-    <input type='number' placeholder='Age' id='ageEntry'></input>
+    <input type='number' placeholder='Age' id='ageEntry' value={profile.age} onChange={onChange}></input>
     <br/>
     <br/>
     <br/>

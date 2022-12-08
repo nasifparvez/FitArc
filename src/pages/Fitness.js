@@ -37,7 +37,7 @@ export default function Fitness() {
 
       const records = await response.json();
       setRecords(records);
-      setSelectedEquipments(records.frequentEquipment);
+      setSelectedEquipments([records.frequentEquipment].flat());
       console.log("success");
 
     }
@@ -96,9 +96,6 @@ export default function Fitness() {
   }
 
 
-  function frequentlyUsedEquipments(){
-    
-  }
 
   function recommendedSetsFunction(){
     var userActivityLevel = records.activityLevel;

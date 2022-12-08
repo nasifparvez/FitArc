@@ -67,7 +67,8 @@ usersRouter.post("/add", function (req, response) {
    frequentEquipment:req.body.frequentEquipment,
    heightFeet:req.body.heightFeet,
    heightInches:req.body.heightInches,
-   weight: req.body.weight
+   weight: req.body.weight,
+   age: req.body.age
  };
  db_connect.collection("user").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -92,7 +93,8 @@ usersRouter.post("/update", function (req, response) {
     frequentEquipment:req.body.frequentEquipment,
     heightFeet:req.body.heightFeet,
     heightInches:req.body.heightInches,
-    weight: req.body.weight
+    weight: req.body.weight,
+    age: req.body.age
   };
   db_connect.collection("user").updateOne({_id:new ObjectId(req.body._id)}, {$set:myobj}, function (err, res) {
     if (err) throw err;

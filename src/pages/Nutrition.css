@@ -1,64 +1,73 @@
 .nutrition{
-    font-size: medium;
+  font-size: medium;
+  flex-direction: column;
 
 }
 
 .meal-disp {
-    font-size: small;
-    flex-direction: column;
-    width: 50rem;
-    float: left;
+  font-size: small;
+  flex-direction: column;
+  width: 30rem;
+  float: left;
 }
 
 .meal-img {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+  width: 100%;
+  margin-bottom: 1rem;
+}
 
-  .meal-card {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    margin: 0 1rem;
-    max-width: 18rem;
-    box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
-    
-  }
-
-  .btn-check {
-    padding: 0.5rem 1rem;
-    background-color: #1bdd55;
-    color: #000000;
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-  }
-
-  .link-text {
-    text-decoration: none;
-    background-color: #1bdd55;
-    color: #000000;
-    width: fit-content;
-    padding: 0.5rem 1rem;
-  }
-
-  .nutrients u1 {
-    display: flex;
-    width: 35rem;
-    justify-content: space-evenly;
-  }
-
-  .mealInfo {
-    float: left;
-    flex-direction: row;
-    padding: 0rem;
-    margin: 0 1rem;
-    max-width: 25rem;
-    box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
-    justify-content: space-evenly;
-
-  }
+.meal-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 0 1rem;
+  max-width: 18rem;
+  box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
   
-  .btn-submit {
-    float: left;
-    width: 100%;
-  }
+}
+
+.btn-check {
+  padding: 0.5rem 1rem;
+  background-color: #1bdd55;
+  color: #000000;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  width: fit-content;
+}
+
+.link-text {
+  padding: 0.5rem 1rem;
+  background-color: #1bdd55;
+  color: #000000;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  width: fit-content;
+  
+}
+
+.nutrients li {
+  display: flex;
+  width: 35rem;
+  justify-content: left;
+  font-size: large;
+}
+
+.mealInfo {
+  float: right;
+  flex-direction: column;
+  padding: 0rem;
+  margin: 0 1rem;
+  width: 35rem;
+  box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
+  justify-content: space-evenly;
+
+}
+
+.instructions li {
+  font-size: medium;
+}
+
+.btn-submit {
+  float: left;
+  width: 100%;
+}

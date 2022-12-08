@@ -4,6 +4,7 @@ export default function Meal({meal, addUserMeal}) {
   const [imageUrl, setImageUrl] = useState("");
   const [mealCal, setMealCal] = useState(0);
   const [mealFat, setMealFat] = useState(0);
+  const [mealCarb, setMealCarb] = useState(0);
   const cals = 0;
   const options = {
     method: 'GET',
@@ -21,6 +22,7 @@ export default function Meal({meal, addUserMeal}) {
       setImageUrl(data.image)
       setMealCal(data.nutrition.nutrients.filter((nutrient) => nutrient.name === "Calories")[0].amount)
       setMealFat(data.nutrition.nutrients.filter((nutrient) => nutrient.name === "Fat")[0].amount)
+      setMealCarb(data.nutrition.nutrients.filter((nutrient) => nutrient.name === "Carbohydrates")[0].amount)
     })
     .catch(err => console.error(err));
   
@@ -34,14 +36,14 @@ export default function Meal({meal, addUserMeal}) {
     <img className="meal-img" src={imageUrl} alt="recipe" />
     <ul className='instructions'>
       <li>Preparation time: {meal.readyInMinutes} minutes</li>
-      <li>Number of servings: {meal.servings} </li>
       <li>Calories: {mealCal} kcal</li>
       <li>Fat: {mealFat}g</li>
+      <li>Carbs: {mealCarb}g</li>
     </ul>
 
     <a className="link-text" href={meal.sourceUrl} target="_blank" rel="noopener noreferrer">Go to Recipe</a>
     <button className="btn-check" onClick={()=>{addUserMeal(meal)}
-                    }>Add to Meal MealsEaten</button>  
+                    }>Add to Meal MealsEaten</button>
 
   </article>
   
