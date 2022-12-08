@@ -66,7 +66,8 @@ usersRouter.post("/add", function (req, response) {
    dietOption:req.body.dietOption,
    frequentEquipment:req.body.frequentEquipment,
    heightFeet:req.body.heightFeet,
-   heightInches:req.body.heightInches
+   heightInches:req.body.heightInches,
+   weight: req.body.weight
  };
  db_connect.collection("user").insertOne(myobj, function (err, res) {
    if (err) throw err;
