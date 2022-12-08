@@ -20,6 +20,7 @@ const catchErrors = require("../helpers/errorHandler.js")
 // This section will help you get a list of all the userss.
 // if you do not use catchErrors, you have to use try {} catch {} in your controller function around everything
 usersRouter.get("/", catchErrors(usersController.getUsers));
+
  
 // This section will help you get a single users by id
 usersRouter.get("/:id", function (req, res) {
@@ -64,15 +65,40 @@ usersRouter.post("/add", function (req, response) {
    allergens:req.body.allergens,
    dietOption:req.body.dietOption,
    frequentEquipment:req.body.frequentEquipment,
-   feetHeight:req.body.feetHeight,
-   inchesHeight:req.body.inchesHeight
+   heightFeet:req.body.heightFeet,
+   heightInches:req.body.heightInches
  };
  db_connect.collection("user").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
  });
 });
- 
+
+// This section will help you update
+usersRouter.post("/update", function (req, response) {
+  let db_connect = dbo.getDb();
+  console.log(req.body);
+  let myobj = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    activityLevel: req.body.activityLevel,
+    gender:req.body.gender,
+    goal:req.body.goal,
+    allergens:req.body.allergens,
+    dietOption:req.body.dietOption,
+    frequentEquipment:req.body.frequentEquipment,
+    heightFeet:req.body.heightFeet,
+    heightInches:req.body.heightInches
+  };
+  db_connect.collection("user").updateOne({_id:new ObjectId(req.body._id)}, {$set:myobj}, function (err, res) {
+    if (err) throw err;
+    response.json(res);
+  });
+ });
+
+
 // This section will help you update a users by id.
 usersRouter.post("/:id", function (req, response) {
  let db_connect = dbo.getDb();

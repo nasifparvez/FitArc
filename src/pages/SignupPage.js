@@ -11,14 +11,14 @@ function SignupPage() {
       <form id='signupForm'onSubmit={(e)=>{
         e.preventDefault();
       }}>
-      <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry'></input>
-      <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry'></input>
+      <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry' required></input>
+      <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry' required></input>
       <br/>
-      <input type='number' placeholder='Age' id='ageEntry'></input>
+      <input type='number' placeholder='Age' id='ageEntry' required></input>
       <br/>
-      <input type='email' name='email' placeholder='email' id='emailEntry'></input>
+      <input type='email' name='email' placeholder='email' id='emailEntry' required></input>
       <br/>
-      <input type='password' placeholder='password' name='password' id='emailEntry'></input>
+      <input type='password' placeholder='password' name='password' id='passwordEntry' required></input>
       <br/>
       <br/>
 
@@ -44,14 +44,14 @@ function SignupPage() {
       <br/>
       <br/>
       <label>Height:</label>
-      <input type='text' placeholder='Feet' name='feetHeight'></input>
-      <input type='text' placeholder='Inches' name='inchesHeight'></input>
+      <input type='number' placeholder='Feet' name='heightFeet' required></input>
+      <input type='number' placeholder='Inches' name='heightInches' required></input>
       <br/>
       <label>Weight:</label>
-      <input type='text' placeholder='Pounds' name='weight'></input>
+      <input type='number' placeholder='Pounds' name='weight' required></input>
       <br/>
       <label>Select Body Goal</label>
-      <select name='goal'>
+      <select name='goal' required>
               <option value="gain 1kg a week">Gain 1kg weekly</option>
               <option value="gain .5kg a week">Gain 0.5 kg weekly</option>
               <option value="gain .25kg a week">Gain 0.25 kg weekly</option>
@@ -62,7 +62,7 @@ function SignupPage() {
         </select>
         <br/>
       <label>Select Activity Level</label>
-      <select name='activityLevel'>
+      <select name='activityLevel' required>
               <option value="sedentary">Sedentary: Little to No Excercise</option>
               <option value="light">Light: Excercise 1-3x per week</option>
               <option value="moderate">Moderate: Exercise 4-5x per week</option>
@@ -178,19 +178,18 @@ function SignupPage() {
           </div>
           <br/>
           <label>Frequently Used Equipment:</label>
-          <ul className="equipmentList" name='frequentEquipment'>
+          <ul className="equipmentList">
           {equipment.map(({name}, index) =>{
             return(
               <li key={index}>
                 <input
                 type="checkbox"
-                name={name}
+                name="frequentEquipment"
                 value={name}
                 />
                 <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
               </li>
             )
-
           })}
           </ul>
           <button className='signupButton'onClick={async ()=>{

@@ -24,11 +24,10 @@ export default function Fitness() {
   const [inputworkoutExcercise, setinputworkoutExcercise] = useState([]);
   const[selectedId, setSelectedID] = useState(null);
 
-  var userActivityLevel;
-  var userFrequentlyUsed;
+
   useEffect(() => {
     async function getRecords(){
-      const response = await fetch('http://localhost:5000/users/');
+      const response = await fetch(`http://localhost:5000/users/${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -38,10 +37,9 @@ export default function Fitness() {
 
       const records = await response.json();
       setRecords(records);
+      setSelectedEquipments(records.frequentEquipment);
       console.log("success");
-      userActivityLevel = records[1].activityLevel;
-      userFrequentlyUsed = records[1].frequentEquipment;
-      console.log(userActivityLevel,userFrequentlyUsed)
+
     }
 
     getRecords();
@@ -103,6 +101,7 @@ export default function Fitness() {
   }
 
   function recommendedSetsFunction(){
+    var userActivityLevel = records.activityLevel;
     var recommendedSets;
     var weeklySets;
     if(userActivityLevel=='sedentary'){
@@ -118,6 +117,7 @@ export default function Fitness() {
     }else if(userActivityLevel=='extra active'){
       weeklySets = 40;
     }
+    return weeklySets;
   }
 
 //Checks if equipment list is checked or unchecked
