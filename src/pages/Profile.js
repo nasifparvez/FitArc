@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css'
 import './Profile.css';
 import {Link} from 'react-router-dom'
 
@@ -67,7 +66,8 @@ export default function Profile() {
   //fetch workouts
   useEffect(() => {
     async function getWorkouts(){
-      const response = await fetch('http://localhost:5000/workouts/');
+      const today = new Date();
+      const response = await fetch(`http://localhost:5000/workouts?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -76,21 +76,22 @@ export default function Profile() {
       }
 
       const workouts = await response.json();
-      const filtered  = workouts.filter((e) => e.date ==="2022-11-30")
-      console.log(date.toISOString().slice(0, 10));
-      setWorkouts(filtered);
+      // const filtered  = workouts.filter((e) => e.date === date.toISOString().slice(0, 10));
+      // console.log("these are the filtered workouts", filtered);
+      setWorkouts(workouts);
     }
 
     getWorkouts();
 
     return
-  }, [workouts.length]);
+  }, []);
 
 
   //fetch meals
   useEffect(() => {
     async function getMeals(){
-      const response = await fetch('http://localhost:5000/meals/');
+      const today = new Date();
+      const response = await fetch(`http://localhost:5000/meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -105,7 +106,7 @@ export default function Profile() {
     getMeals();
     
     return
-  }, [meals.length]);
+  }, []);
 
 
   //This method will delete a record
@@ -159,6 +160,8 @@ export default function Profile() {
         <Calendar 
           onChange={setDate} 
           value={date}
+          minDate={new Date(2022, 10, 30)}
+          maxDate={new Date()}
           />
       </div>
       <div class="Journal"><table>
