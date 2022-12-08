@@ -77,11 +77,11 @@ function AccountSettings() {
     <br/>
     <br/>
     <label>Height:</label>
-    <input type='text' placeholder='Feet' name='feetHeight'></input>
-    <input type='text' placeholder='Inches' name='inchesHeight'></input>
+    <input type='number' placeholder='Feet' name='heightFeet' value={profile.heightFeet} onChange={onChange}></input>
+    <input type='number' placeholder='Inches' name='heightInches' value={profile.heightInches} onChange={onChange}></input>
     <br/>
     <label>Weight:</label>
-    <input type='text' placeholder='Pounds' name='weight'></input>
+    <input type='number' placeholder='Pounds' name='weight' value={profile.weight}></input>
     <br/>
     <label>Select Body Goal</label>
     <select name='goal' value={profile.goal} onChange={onChange}>
@@ -105,7 +105,7 @@ function AccountSettings() {
       </select>
       <br/>
     <label>Enter Allergens (seperate by commas):</label>
-    <input type='text' name='allergens'></input>
+    <input type='text' name='allergens' value={profile.allergens} onChange={onChange} ></input>
     <br/>
     <label>Enter Diet:</label>
     <div className='dietOptionSection'>
@@ -115,6 +115,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="vegan"
+        checked={profile.dietOption?.includes("vegan")}
+        onChange={checkedOnChange}
       />
       Vegan
     </div>
@@ -124,6 +126,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Vegetarian"
+        checked={profile.dietOption?.includes("Vegetarian")}
+        onChange={checkedOnChange}
       />
       Vegetarian
     </div>
@@ -133,6 +137,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Lacto-Vegetarian"
+        checked={profile.dietOption?.includes("Lacto-Vegetarian")}
+        onChange={checkedOnChange}
       />
       Lacto-Vegetarian  
     </div>
@@ -142,6 +148,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Ovo-Vegetarian"
+        checked={profile.dietOption?.includes("Ovo-Vegetarian")}
+        onChange={checkedOnChange}
       />
     Ovo-Vegetarian
     </div>
@@ -151,6 +159,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Pescatarian"
+        checked={profile.dietOption?.includes("Pescatarian")}
+        onChange={checkedOnChange}
       />
       Pescatarian
       </div>
@@ -160,6 +170,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Ketogenic"
+        checked={profile.dietOption?.includes("Ketogenic")}
+        onChange={checkedOnChange}
       />
       Ketogenic
       </div>
@@ -169,6 +181,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Gluten-free"
+        checked={profile.dietOption?.includes("Gluten-free")}
+        onChange={checkedOnChange}
       />
       Gluten-free
       </div>
@@ -178,6 +192,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Paleo"
+        checked={profile.dietOption?.includes("Paleo")}
+        onChange={checkedOnChange}
       />
         Paleo
         </div>
@@ -187,6 +203,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Primal"
+        checked={profile.dietOption?.includes("Primal")}
+        onChange={checkedOnChange}
       />
         Primal
         </div>
@@ -196,6 +214,8 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Whole30"
+        checked={profile.dietOption?.includes("Whole30")}
+        onChange={checkedOnChange}
       />
         Whole30
         </div>
@@ -205,13 +225,15 @@ function AccountSettings() {
         id="dietOption"
         name="dietOption"
         value="Low FODMAP"
+        checked={profile.dietOption?.includes("Low FODMAP")}
+        onChange={checkedOnChange}
       />
         Low FODMAP
         </div>
         </div>
         <br/>
         <label>Frequently Used Equipment:</label>
-        <ul className="equipmentList" >
+        <ul className="equipmentList">
         {equipment.map(({name}, index) =>{
           return(
             <li key={index}>
