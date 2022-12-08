@@ -14,7 +14,7 @@ function SignupPage() {
       <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry' required></input>
       <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry' required></input>
       <br/>
-      <input type='number' placeholder='Age' id='ageEntry' required></input>
+      <input type='number' name='age' placeholder='Age' id='ageEntry' required></input>
       <br/>
       <input type='email' name='email' placeholder='email' id='emailEntry' required></input>
       <br/>

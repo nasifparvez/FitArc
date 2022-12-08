@@ -1,20 +1,46 @@
 import React, {useEffect, useState} from 'react';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css'
 import './Profile.css';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom'
+
 
 //const for fetching and displaying name
 const Name = (props) => (
-  <p className='text'> Hello {props.record.firstName} {props.record.lastName}</p>
+  <div>
+    <p className='textName'> Hello {props.record.firstName} {props.record.lastName} </p>
+    <br></br>
+    <p className='text'><b>Goal</b>: {props.record.goal}</p>
+    <p>Original Weight: {props.record.weight}</p>
+  </div>
+  
+  
 );
 
+//const for fetching and displaying workouts
+//&#x2022; adds bullet point
+const Workout = (props) => (
+  <tr>
+    <td>&#x2022;   {props.workout.name}<td classname='setText'> - <i>{props.workout.sets}</i> sets of <i>{props.workout.reps}</i> reps</td></td>
+  </tr>
+);
+
+//const for fetching and displaying meals
+//&#x2022; adds bullet point
+const Meals = (props) => (
+  <tr>
+    <td>&#x2022;   {props.meals.name}
+      <td classname='setText'> - Cals: <i>{props.meals.calories}</i> P: <i>{props.meals.protein}</i>g C: <i>{props.meals.carbs}</i>g F: <i>{props.meals.fat}g</i></td>
+    </td>
+  </tr>
+);
 
 
 
 export default function Profile() {
   const [date, setDate] = useState(new Date());
   const [records, setRecords] = useState([]);
+  const [workouts, setWorkouts] = useState([]);
+  const [meals, setMeals] = useState([]);
   // test
   //This method fetches the individual user from the database
   useEffect(() => {
@@ -28,6 +54,7 @@ export default function Profile() {
       }
 
       const records = await response.json();
+      
       setRecords(records);
     }
 
@@ -36,10 +63,9 @@ export default function Profile() {
     return;
   }, [records.length]);
 
-  //Used for displaying workout info
-  const [workouts, setWorkouts] = useState([]);
+  //fetch workouts
   useEffect(() => {
-    async function getRecords(){
+    async function getWorkouts(){
       const today = new Date();
       const response = await fetch(`http://localhost:5000/workouts?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
@@ -49,37 +75,39 @@ export default function Profile() {
         return;
       }
 
-      const records = await response.json();
-      setWorkouts(records);
+      const workouts = await response.json();
+      // const filtered  = workouts.filter((e) => e.date === date.toISOString().slice(0, 10));
+      // console.log("these are the filtered workouts", filtered);
+      setWorkouts(workouts);
     }
 
-    getRecords();
+    getWorkouts();
 
-    return;
+    return
   }, []);
 
 
- //Used for displaying meal info
- const [meals, setMeals] = useState([]);
- useEffect(() => {
-   async function getRecords(){
-     const today = new Date();
-     const response = await fetch(`http://localhost:5000/meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
+  //fetch meals
+  useEffect(() => {
+    async function getMeals(){
+      const today = new Date();
+      const response = await fetch(`http://localhost:5000/meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
-     if (!response.ok){
-       const message = `An error occured: ${response.statusText}`;
-       window.alert(message);
-       return;
-     }
+      if (!response.ok){
+        const message = `An error occured: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
 
-     const records = await response.json();
-     setMeals(records);
-   }
+      const meals = await response.json();
+      setMeals(meals);
+    }
 
-   getRecords();
+    getMeals();
+    
+    return
+  }, []);
 
-   return;
- }, []);
 
   //This method will delete a record
   async function deleteRecord(id){
@@ -101,36 +129,65 @@ export default function Profile() {
         />
       );
   }
+
+  //this method will display the workouts
+  function displayWorkout(){
+    return workouts.map((workout) => {
+      return (
+        <Workout
+          workout={workout}
+        />
+      );
+    });
+  }
+
+  //this method will display the meals
+  function displayMeals(){
+    return meals.map((meal) => {
+      return (
+        <Meals
+          meals={meal}
+        />
+      );
+    });
+  }
   
 
   //end test
   return (
-    <div className="profile">
-      <div className='image'>
-        {displayName()}
+    <div class="container">
+      <div class="Calendar">
+        <Calendar 
+          onChange={setDate} 
+          value={date}
+          minDate={new Date(2022, 10, 30)}
+          maxDate={new Date()}
+          />
       </div>
-      <div className="calendar-container">
-        <Calendar onChange={setDate} value={date}/>
-      </div>
-      <div className="text-center">
-        {/* Selected date: {date.toDateString()} */}
-        <table>
-          <tr>
-            <th>{date.toDateString()} Journal</th>
-          </tr>
-          <tr>
-            <th>Food Eaten</th>
+      <div class="Journal"><table>
+            <tr>
+              <th>{date.toISOString().slice(0, 10)} Journal</th>
             </tr>
-         {meals.map((meal)=><tr><td>{meal.name}</td></tr>)}
-          <tr>
-            <th>Exercises Completed</th>
-          </tr>
-         {workouts.map((workout)=><tr><td>{workout.name}</td></tr>)}
-          <tr>
-            <th>Weight Today</th>
-          </tr>
-        </table>
-      </div>
+            <tr>
+              <th>Food Eaten <Link to='/nutrition' className="linkPlus">+</Link></th>
+            </tr>
+            <div className="tableScroll">
+              {displayMeals()}
+            </div>
+            
+            <tr>
+              <th>Exercises Completed <Link to='/fitness' className="linkPlus">+</Link></th>
+            </tr>
+            <div className="tableScroll">
+              {displayWorkout()}
+            </div>
+            
+            <tr>
+              <th>Weight Today</th>
+            </tr>
+          </table></div>
+      <div class="Avatar"><img src='https://mir-s3-cdn-cf.behance.net/project_modules/disp/96be2232163929.567197ac6fb64.png'/></div>
+      <div class="Name">{displayName()}</div>
     </div>
   );
 }

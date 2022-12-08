@@ -7,7 +7,7 @@ const getMeals=async (req, res, next)=>{
   var userId= req.query.userId;
   const db_connect = dbo.getDb("FitArc");
   db_connect
-    .collection("workoutLog")
+    .collection("MealLog")
     .find({date,userId})
     .toArray(function (err, result) {
       if (err) throw err;
