@@ -98,3 +98,7 @@
   .rightHandContainerOptions p{
     padding-right:60px
   }
+
+  .rightHandContainerOptions{
+    margin-left: 1100px;
+  }

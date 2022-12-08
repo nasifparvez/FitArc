@@ -10,7 +10,7 @@ const Name = (props) => (
     <p className='textName'> Hello {props.record.firstName} {props.record.lastName} </p>
     <br></br>
     <p className='text'><b>Goal</b>: {props.record.goal}</p>
-    <p>Original Weight: {props.record.weight}</p>
+    <p>Original Weight: {props.record.weight} lbs</p>
   </div>
   
   
