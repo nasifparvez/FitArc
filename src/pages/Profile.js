@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css'
 import './Profile.css';
-// import avatar from './avatar.png';
+import {Link} from 'react-router-dom'
 
 
 //const for fetching and displaying name
@@ -55,6 +55,7 @@ export default function Profile() {
       }
 
       const records = await response.json();
+      
       setRecords(records);
     }
 
@@ -75,7 +76,9 @@ export default function Profile() {
       }
 
       const workouts = await response.json();
-      setWorkouts(workouts);
+      const filtered  = workouts.filter((e) => e.date ==="2022-11-30")
+      console.log(date.toISOString().slice(0, 10));
+      setWorkouts(filtered);
     }
 
     getWorkouts();
@@ -100,7 +103,7 @@ export default function Profile() {
     }
 
     getMeals();
-
+    
     return
   }, [meals.length]);
 
@@ -152,20 +155,25 @@ export default function Profile() {
   //end test
   return (
     <div class="container">
-      <div class="Calendar"><Calendar onChange={setDate} value={date}/></div>
+      <div class="Calendar">
+        <Calendar 
+          onChange={setDate} 
+          value={date}
+          />
+      </div>
       <div class="Journal"><table>
             <tr>
-              <th>{date.toDateString()} Journal</th>
+              <th>{date.toISOString().slice(0, 10)} Journal</th>
             </tr>
             <tr>
-              <th>Food Eaten</th>
+              <th>Food Eaten <Link to='/nutrition' className="linkPlus">+</Link></th>
             </tr>
             <div className="tableScroll">
               {displayMeals()}
             </div>
             
             <tr>
-              <th>Exercises Completed</th>
+              <th>Exercises Completed <Link to='/fitness' className="linkPlus">+</Link></th>
             </tr>
             <div className="tableScroll">
               {displayWorkout()}

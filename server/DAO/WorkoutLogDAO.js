@@ -19,7 +19,7 @@ class WorkoutLogDAO {
     this.sets = sets;
     this.muscle = muscle;
     this.time = time;
-    this.date = JSON.stringify(date);
+    this.date = date;
   }
 }
 
