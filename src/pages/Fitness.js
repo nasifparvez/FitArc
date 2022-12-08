@@ -171,7 +171,7 @@ export default function Fitness() {
         <div className='equipementSection'>
           <div className='equipmentHeader'>
             <h2>Equipment Used</h2>
-            <button className='moreButton' onClick={() => setButtonPopup(true)}>|||||</button>
+            <button className='moreButton' onClick={() => setButtonPopup(true)}>Click to Add More Equipment</button>
             <EditEquipmentWindow trigger={buttonPopup}setTrigger={setButtonPopup}> 
               <h3>Choose Equipment</h3>
               <FitnessEquipmentList

@@ -20,6 +20,7 @@ const [password, setPassword]=useState("");
                 <br/>
                 <button onClick={async ()=>{
                   const response = await fetch("http://localhost:5000/users/login",{method:"POST", body:JSON.stringify({email,password}),headers:{"content-type": "application/json"}})
+                  //Makes sure user exists or has put in the correct information
                   if(!response.ok){
                     alert("Bad log in")
                     return;
@@ -28,6 +29,7 @@ const [password, setPassword]=useState("");
                   localStorage.setItem("firstName", user.firstName)
                   localStorage.setItem("userId", user._id)
                   console.log(user)
+                  //Redirects to users profile page
                   navigate("/profile")}}>Log In</button>
             </div>
             <div className='otherOptionsContainer'>

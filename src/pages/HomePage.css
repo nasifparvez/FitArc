@@ -1,36 +1,84 @@
 body{
-    background-color: #F1EFEF;
+  background-color: #F1EFEF;
 }
 .mainTitle{
-    font-size: 1.8rem;
-    color:#707070;
-    display: flex 1 1 auto;;
-    flex-direction: column;
-    align-self: center;
-    padding-top: 150px;
-    padding-right: 265px;
-    height: calc(100vh - 69px);
+  font-size: 1.8rem;
+  color:#707070;
+  display: flex 1 1 auto;;
+  flex-direction: column;
+  align-self: center;
+  padding-top: 150px;
+  padding-right: 265px;
+  height: calc(100vh - 69px);
 }
 
 .banner-hero {
-    flex: 1;
-    align-self: center;
-    max-width: 50%;
-    border:1px solid red;
-    text-align: center;
-    display: inline-block;
-  }
+  flex: 1;
+  align-self: center;
+  max-width: 50%;
+  border:1px solid red;
+  text-align: center;
+  display: inline-block;
+}
 
 
-  .homepageContainer{
-    display: flex;
-    flex-direction: column;
-  }
+.homepageContainer{
+  display: flex;
+  flex-direction: column;
+}
 
-  .featuresSection, .nutritionSection,.fitnessSection{
-    height: 600px;
-  }
+.featuresSection {
+  height: 600px;
+}
+.nutritionSection,.fitnessSection{
+  height: 500px;
+  
+}
 
-  .featuresSection{
-    background-color: #10c051;
-  }
+.featuresSection{
+  text-align: center;
+  background-color: #10c051;
+  height: 600px;
+  flex-direction: row;
+  padding: 1%;
+}
+
+.featuresInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.infoSection{
+  display: flex;
+  flex-direction: column;
+  
+  
+  
+  
+}
+
+.funcSection {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  float: right;
+  background-color: #ebe3e3;
+}
+
+.paragraph {
+  text-align: left;
+  font-size:19px;
+  padding: 5%;
+  max-width: 400px;
+  
+}
+
+.featureImg {
+  width: 200px;
+  height: 200px;
+}
+
+.space {
+  width: 900px;
+}

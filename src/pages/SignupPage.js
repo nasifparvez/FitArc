@@ -9,7 +9,7 @@ function SignupPage() {
       <h1 className='signupTitle'>Sign Up</h1>
       <br/>
       <form id='signupForm'onSubmit={(e)=>{
-        e.preventDefault();
+        e.preventDefault();//Helps in redirecting to log in page
       }}>
       <input type='text' name='firstName' placeholder='First Name' id='firstNameEntry' required></input>
       <input type='text' name='lastName'placeholder='Last Name' id='lastNameEntry' required></input>
@@ -195,12 +195,13 @@ function SignupPage() {
           <button className='signupButton'onClick={async ()=>{
             var form = document.getElementById("signupForm")
             var formData = new FormData(form)
+            //User info that is to be sent
             var response = await fetch("http://localhost:5000/users/add",{body:new URLSearchParams(formData).toString(), method:"POST", headers:{"content-type":"application/x-www-form-urlencoded"}})
             if(!response.ok){
               alert("improper sign up ")
               return
             }
-            navigate("/login")
+            navigate("/login")//Redirects to log in page
           }}>Sign Up</button>
 
       </form>

@@ -6,6 +6,8 @@ import {useEffect, useState} from 'react'
 function AccountSettings() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
+
+  //Gets all user info
   useEffect(() => {
     async function getRecords(){
       const response = await fetch(`http://localhost:5000/users/${localStorage.getItem("userId")}`);
@@ -25,9 +27,13 @@ function AccountSettings() {
 
     return;
   },[]);
+
+  //On Change Function so text and radio button values are editable  
   function onChange(e){
     setProfile({...profile,[e.target.name]:e.target.value})
   }
+
+  //On Change Function so checkbox values are editable  
   function checkedOnChange(e){
     if(e.target.checked)
     setProfile({...profile,[e.target.name]:[...profile[e.target.name],e.target.value]})
@@ -251,12 +257,13 @@ function AccountSettings() {
         })}
         </ul>
         <button className='signupButton'onClick={async ()=>{
+          //Edited info of user sent to the backend 
           var response = await fetch("http://localhost:5000/users/update",{body:JSON.stringify(profile), method:"POST", headers:{"content-type":"application/json"}})
           if(!response.ok){
             alert("improper account editing ")
             return
           }
-          navigate("/profile")
+          navigate("/profile")//Redirects to profile page of the user
         }}>Edit Account</button>
 
     </form>
