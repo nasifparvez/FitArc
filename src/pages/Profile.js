@@ -36,6 +36,7 @@ export default function Profile() {
     return;
   }, [records.length]);
 
+  //Used for displaying workout info
   const [workouts, setWorkouts] = useState([]);
   useEffect(() => {
     async function getRecords(){
@@ -56,6 +57,29 @@ export default function Profile() {
 
     return;
   }, []);
+
+
+ //Used for displaying meal info
+ const [meals, setMeals] = useState([]);
+ useEffect(() => {
+   async function getRecords(){
+     const today = new Date();
+     const response = await fetch(`http://localhost:5000/meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
+
+     if (!response.ok){
+       const message = `An error occured: ${response.statusText}`;
+       window.alert(message);
+       return;
+     }
+
+     const records = await response.json();
+     setMeals(records);
+   }
+
+   getRecords();
+
+   return;
+ }, []);
 
   //This method will delete a record
   async function deleteRecord(id){
@@ -96,16 +120,8 @@ export default function Profile() {
           </tr>
           <tr>
             <th>Food Eaten</th>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
-          <tr>
-            <td>Pizza</td>
-          </tr>
+            </tr>
+         {meals.map((meal)=><tr><td>{meal.name}</td></tr>)}
           <tr>
             <th>Exercises Completed</th>
           </tr>
