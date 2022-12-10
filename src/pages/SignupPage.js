@@ -2,6 +2,9 @@ import React from 'react'
 import './SignupPage.css'
 import{ equipment } from '../utils/equipment';
 import { useNavigate } from "react-router";
+
+const {REACT_APP_BASE_URL} =  process.env;
+
 function SignupPage() {
   const navigate = useNavigate();
   return (
@@ -196,7 +199,7 @@ function SignupPage() {
             var form = document.getElementById("signupForm")
             var formData = new FormData(form)
             //User info that is to be sent
-            var response = await fetch("http://localhost:5000/users/add",{body:new URLSearchParams(formData).toString(), method:"POST", headers:{"content-type":"application/x-www-form-urlencoded"}})
+            var response = await fetch(`${REACT_APP_BASE_URL}users/add`,{body:new URLSearchParams(formData).toString(), method:"POST", headers:{"content-type":"application/x-www-form-urlencoded"}})
             if(!response.ok){
               alert("improper sign up ")
               return

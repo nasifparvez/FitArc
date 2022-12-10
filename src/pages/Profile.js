@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Calendar from 'react-calendar';
 import './Profile.css';
 import {Link} from 'react-router-dom'
+const {REACT_APP_BASE_URL} =  process.env
 
 
 //const for fetching and displaying name
@@ -45,7 +46,7 @@ export default function Profile() {
   //This method fetches the individual user from the database
   useEffect(() => {
     async function getRecords(){
-      const response = await fetch(`http://localhost:5000/users/${localStorage.getItem("userId")}`);
+      const response = await fetch(`${REACT_APP_BASE_URL}users/${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -67,7 +68,7 @@ export default function Profile() {
   useEffect(() => {
     async function getWorkouts(){
       const today = new Date();
-      const response = await fetch(`http://localhost:5000/workouts?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
+      const response = await fetch(`${REACT_APP_BASE_URL}workouts?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -91,7 +92,7 @@ export default function Profile() {
   useEffect(() => {
     async function getMeals(){
       const today = new Date();
-      const response = await fetch(`http://localhost:5000/meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
+      const response = await fetch(`${REACT_APP_BASE_URL}meals?date=${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}&userId=${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -111,7 +112,7 @@ export default function Profile() {
 
   //This method will delete a record
   async function deleteRecord(id){
-    await fetch(`http://localhost:5000/${id}`, {
+    await fetch(`${REACT_APP_BASE_URL}${id}`, {
       method: "DELETE"
     });
 

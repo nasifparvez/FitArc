@@ -3,6 +3,7 @@ import { json, useNavigate } from 'react-router-dom'
 import './LogInPage.css'
 import {Link} from 'react-router-dom'
 
+const {REACT_APP_BASE_URL} =  process.env
 
 function LogInPage() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const [password, setPassword]=useState("");
                 <input type= 'password'name = 'password' placeholder = 'Password' value={password} onChange={(e)=>setPassword(e.target.value)}></input>
                 <br/>
                 <button onClick={async ()=>{
-                  const response = await fetch("http://localhost:5000/users/login",{method:"POST", body:JSON.stringify({email,password}),headers:{"content-type": "application/json"}})
+                  const response = await fetch(`${REACT_APP_BASE_URL}/users/login`,{method:"POST", body:JSON.stringify({email,password}),headers:{"content-type": "application/json"}})
                   //Makes sure user exists or has put in the correct information
                   if(!response.ok){
                     alert("Bad log in")

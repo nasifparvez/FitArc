@@ -6,6 +6,9 @@ import EditEquipmentWindow from '../components/EditEquipmentWindow';
 import FitnessEquipmentList from '../components/FitnessEquipmentList';
 import FitnessMuscleList from '../components/FitnessMuscleList';
 
+const {REACT_APP_BASE_URL} =  process.env
+
+
 export default function Fitness() {
   const today = new Date();
   const [excercisesArray, setexcercisesArray] = useState([]);
@@ -27,7 +30,7 @@ export default function Fitness() {
 
   useEffect(() => {
     async function getRecords(){
-      const response = await fetch(`http://localhost:5000/users/${localStorage.getItem("userId")}`);
+      const response = await fetch(`${REACT_APP_BASE_URL}users/${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -50,7 +53,7 @@ export default function Fitness() {
   
   const submitWorkoutList = async (event) =>{
     for(const workout of inputworkoutExcercise){
-    await fetch('http://localhost:5000/workouts/',{method:"POST",body:JSON.stringify({...workout, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
+    await fetch('${REACT_APP_BASE_URL}workouts/',{method:"POST",body:JSON.stringify({...workout, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
   }
   }
 
