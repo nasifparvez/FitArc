@@ -87,7 +87,7 @@ function AccountSettings() {
     <input type='number' placeholder='Inches' name='heightInches' value={profile.heightInches} onChange={onChange}></input>
     <br/>
     <label>Weight:</label>
-    <input type='number' placeholder='Pounds' name='weight' value={profile.weight}></input>
+    <input type='number' placeholder='Pounds' name='weight' value={profile.weight} onChange={onChange}></input>
     <br/>
     <label>Select Body Goal</label>
     <select name='goal' value={profile.goal} onChange={onChange}>
