@@ -32,7 +32,7 @@ export default function Nutrition() {
       name: meal.title,
       calories: meal.calories,
       fat: meal.fat,
-      carb: meal.carb
+      carbs: meal.carb
     })
     })
     console.log(mealsChosen)
@@ -50,6 +50,7 @@ export default function Nutrition() {
 
   var bmr
   var tdee
+  var tdee2
   
   var userWeightNum = parseInt(userWeight)
   var userHeightFeetNum = parseInt(userHeightFeet)
@@ -58,9 +59,11 @@ export default function Nutrition() {
 
   var userHeight = (((12 * userHeightFeetNum) + userHeightInchesNum) * 2.54)
 
+  /* "BMR Definition: Your Basal Metabolic Rate (BMR) is the number of calories you burn as your body performs basic (basal) life-sustaining function. 
+      Commonly also termed as Resting Metabolic Rate (RMR), which is the calories burned if you stayed in bed all day." 
+      “Basal Metabolic Rate Calculator.” Garnet Health, https://www.garnethealth.org/news/basal-metabolic-rate-calculator#:~:text=BMR%20Definition%3A%20Your%20Basal%20Metabolic,stayed%20in%20bed%20all%20day.  */
 
-/* "BMR Definition: Your Basal Metabolic Rate (BMR) is the number of calories you burn as your body performs basic (basal) life-sustaining function. Commonly also termed as Resting Metabolic Rate (RMR), which is the calories burned if you stayed in bed all day." 
-“Basal Metabolic Rate Calculator.” Garnet Health, https://www.garnethealth.org/news/basal-metabolic-rate-calculator#:~:text=BMR%20Definition%3A%20Your%20Basal%20Metabolic,stayed%20in%20bed%20all%20day.  */
+
   if (userSex === "Male"){
     bmr = (88.362 + (13.397 * userWeightNum) + (4.799 * userHeight) - (5.677 * userAgeNum));
   }
@@ -68,8 +71,10 @@ export default function Nutrition() {
     bmr = (447.593 + (9.247 * userWeightNum) + (3.098 * userHeight) - (4.330 * userAgeNum));
   }
 
-  /* "Total daily energy expenditure (TDEE) estimates how many calories your body burns daily by accounting for three major contributing factors: your basal metabolic rate (BMR), your activity level and the thermic effect of food metabolism."
-“Total Daily Energy Expenditure (TDEE) Calculator.” Forbes, Forbes Magazine, 9 Nov. 2022, https://www.forbes.com/health/body/tdee-calculator/#:~:text=Total%20daily%20energy%20expenditure%20(TDEE)%20estimates%20how%20many%20calories%20your,thermic%20effect%20of%20food%20metabolism. */
+/* "Total daily energy expenditure (TDEE) estimates how many calories your body burns daily by accounting for three major contributing factors: 
+    your basal metabolic rate (BMR), your activity level and the thermic effect of food metabolism."
+    “Total Daily Energy Expenditure (TDEE) Calculator.” Forbes, Forbes Magazine, 9 Nov. 2022, https://www.forbes.com/health/body/tdee-calculator/#:~:text=Total%20daily%20energy%20expenditure%20(TDEE)%20estimates%20how%20many%20calories%20your,thermic%20effect%20of%20food%20metabolism. */
+
   switch(userActivity) {
     case "sedentary":
       tdee = bmr * 1.2
@@ -88,29 +93,33 @@ export default function Nutrition() {
       break
   }
 
-   /* To lose weight one needs to be on a calorie deficit, and depending on how much weight one wants to lose the amount of calories removed from the TDEE also changes. Same thing for weight gain */
+  /* To lose weight one needs to be on a calorie deficit, and depending on how much weight one wants to lose the amount of calories removed from the TDEE also changes. 
+    Same thing for weight gain */
+
   switch(weightGoal) {
     case "lose .25kg a week":
-      tdee = tdee - 250
+      tdee2 = tdee - 250
       break
     case "lose .5kg a week":
-      tdee = tdee - 500
+      tdee2 = tdee - 500
       break
     case "lose 1kg a week":
-      tdee = tdee - 1000
+      tdee2 = tdee - 1000
       break
     case "":
       break
     case "gain .25kg a week":
-      tdee = tdee + 250
+      tdee2 = tdee + 250
       break
     case "gain .50kg a week":
-      tdee = tdee + 500
+      tdee2 = tdee + 500
       break
     case "gain 1kg a week":
-      tdee = tdee + 1000
+      tdee2 = tdee + 1000
       break
   }
+
+  var userCalories = tdee2
   
    useEffect(() => {
     async function getRecords(){
@@ -134,7 +143,7 @@ export default function Nutrition() {
       setUserHeightFeet(records.heightFeet)
       setUserHeightInches(records.heightInches)
       setWeightGoal(records.bodyGoal)
-      console.log(userWeight,userAgeNum, userAllergen,userActivity,userSex, userDietPref)
+      console.log(userWeight,userAge, userAllergen,userActivity,userSex)
     }
 
     getRecords();
@@ -149,6 +158,9 @@ export default function Nutrition() {
   }
   
 
+  
+
+
   const options = {
     method: 'GET',
     headers: {
@@ -157,14 +169,17 @@ export default function Nutrition() {
     }
   };
 
-  var calories = 2000
+  
+
+
+  
 
   function getMealData(){
     console.log("getMealdata")
-    console.log(userWeight,userAgeNum, userAllergen,userActivity,userSex, userDietPref)
+    console.log(userActivity, userDietPref, userAllergen, userSex, userCalories)
     console.log(userAddedMeals)
 
-    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}&diet=${userDietPref}&exclude=${userAllergen}`, options)
+    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${userCalories}&diet=${userDietPref}&exclude=${userAllergen}`, options)
 	.then(response => response.json())
   .then((data) => {
     setMealData(data);
