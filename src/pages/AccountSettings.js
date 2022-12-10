@@ -4,7 +4,6 @@ import{ equipment } from '../utils/equipment';
 import { useNavigate } from "react-router";
 import {useEffect, useState} from 'react'
 
-const {REACT_APP_BASE_URL} =  process.env
 
 function AccountSettings() {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ function AccountSettings() {
   //Gets all user info
   useEffect(() => {
     async function getRecords(){
-      const response = await fetch(`${REACT_APP_BASE_URL}users/${localStorage.getItem("userId")}`);
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/${localStorage.getItem("userId")}`);
 
       if (!response.ok){
         const message = `An error occured: ${response.statusText}`;
@@ -261,7 +260,7 @@ function AccountSettings() {
         </ul>
         <button className='signupButton'onClick={async ()=>{
           //Edited info of user sent to the backend 
-          var response = await fetch(`${REACT_APP_BASE_URL}users/update`,{body:JSON.stringify(profile), method:"POST", headers:{"content-type":"application/json"}})
+          var response = await fetch(`${process.env.REACT_APP_BASE_URL}users/update`,{body:JSON.stringify(profile), method:"POST", headers:{"content-type":"application/json"}})
           if(!response.ok){
             alert("improper account editing ")
             return

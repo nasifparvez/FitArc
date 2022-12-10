@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const {REACT_APP_BASE_URL} =  process.env
  
 const Record = (props) => (
  <tr>
@@ -26,7 +25,7 @@ export default function RecordList() {
  // This method fetches the records from the database.
  useEffect(() => {
    async function getRecords() {
-     const response = await fetch(`${REACT_APP_BASE_URL}users/`);
+     const response = await fetch(`${process.env.REACT_APP_BASE_URL}users/`);
  
      if (!response.ok) {
        const message = `An error occurred: ${response.statusText}`;
@@ -45,7 +44,7 @@ export default function RecordList() {
  
  // This method will delete a record
  async function deleteRecord(id) {
-   await fetch(`${REACT_APP_BASE_URL}${id}`, {
+   await fetch(`${process.env.REACT_APP_BASE_URL}${id}`, {
      method: "DELETE"
    });
  
