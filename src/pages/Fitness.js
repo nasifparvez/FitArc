@@ -52,7 +52,7 @@ export default function Fitness() {
   
   const submitWorkoutList = async (event) =>{
     for(const workout of inputworkoutExcercise){
-    await fetch('${process.env.REACT_APP_BASE_URL}workouts/',{method:"POST",body:JSON.stringify({...workout, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
+    await fetch(`${process.env.REACT_APP_BASE_URL}workouts/`,{method:"POST",body:JSON.stringify({...workout, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
   }
   }
 

@@ -154,7 +154,7 @@ export default function Nutrition() {
 
   const submitMeals = async (event) =>{
     for(const meal of mealsChosen){
-    await fetch('${process.env.REACT_APP_BASE_URL}meals/',{method:"POST",body:JSON.stringify({...meal, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
+    await fetch(`${process.env.REACT_APP_BASE_URL}meals/`,{method:"POST",body:JSON.stringify({...meal, date:`${today.getFullYear()}-${(today.getMonth()+1).toString().padStart(2,"0")}-${today.getDate().toString().padStart(2,"0")}`,userId:localStorage.getItem("userId")}), headers:{"content-type": "application/json"}})
   }
   }
   
