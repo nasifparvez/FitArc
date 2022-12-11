@@ -179,6 +179,8 @@ export default function Nutrition() {
     console.log("getMealdata")
     console.log(userActivity, userDietPref, userAllergen, userSex, userCalories)
     console.log(userAddedMeals)
+    console.log(tdee, tdee2, bmr)
+    console.log(userWeightNum, userHeight, userAgeNum)
 
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${userCalories}&diet=${userDietPref}&exclude=${userAllergen}`, options)
 	.then(response => response.json())
