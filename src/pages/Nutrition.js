@@ -144,7 +144,7 @@ export default function Nutrition() {
       setUserHeightFeet(records.heightFeet)
       setUserHeightInches(records.heightInches)
       setWeightGoal(records.bodyGoal)
-      console.log(userWeight,userAge, userAllergen,userActivity,userSex, weightGoal)
+      console.log(userWeight,userAge, userAllergen,userActivity,userSex)
     }
 
     getRecords();
@@ -180,7 +180,7 @@ export default function Nutrition() {
     console.log(userActivity, userDietPref, userAllergen, userSex, userCalories)
     console.log(userAddedMeals)
     console.log(tdee, tdee2, bmr)
-    console.log(userWeightNum, userHeight, userAgeNum)
+    console.log(userWeightNum, userHeight, userAgeNum, weightGoal)
 
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${userCalories}&diet=${userDietPref}&exclude=${userAllergen}`, options)
 	.then(response => response.json())
