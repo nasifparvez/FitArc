@@ -66,10 +66,10 @@ export default function Nutrition() {
 
 
   if (userSex === "Male"){
-    bmr = (88.362 + (13.397 * userWeightNum) + (4.799 * userHeight) - (5.677 * userAgeNum));
+    bmr = (88.362 + (13.397 * (userWeightNum/2.205)) + (4.799 * userHeight) - (5.677 * userAgeNum));
   }
   else {
-    bmr = (447.593 + (9.247 * userWeightNum) + (3.098 * userHeight) - (4.330 * userAgeNum));
+    bmr = (447.593 + (9.247 * (userWeightNum/2.205)) + (3.098 * userHeight) - (4.330 * userAgeNum));
   }
 
 /* "Total daily energy expenditure (TDEE) estimates how many calories your body burns daily by accounting for three major contributing factors: 
