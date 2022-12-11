@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/FitArc/static/css/main.9673dd3f.css",
-    "main.js": "/FitArc/static/js/main.7c08db7b.js",
+    "main.js": "/FitArc/static/js/main.4fbf120e.js",
     "static/media/nutrition.png": "/FitArc/static/media/nutrition.40697c46ef3c63945f53.png",
     "static/media/features.png": "/FitArc/static/media/features.94cebfb0ded6a1bd4a36.png",
     "index.html": "/FitArc/index.html",
     "main.9673dd3f.css.map": "/FitArc/static/css/main.9673dd3f.css.map",
-    "main.7c08db7b.js.map": "/FitArc/static/js/main.7c08db7b.js.map"
+    "main.4fbf120e.js.map": "/FitArc/static/js/main.4fbf120e.js.map"
   },
   "entrypoints": [
     "static/css/main.9673dd3f.css",
-    "static/js/main.7c08db7b.js"
+    "static/js/main.4fbf120e.js"
   ]
 }
