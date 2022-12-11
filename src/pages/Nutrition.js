@@ -107,7 +107,7 @@ export default function Nutrition() {
     case "lose 1kg a week":
       tdee2 = tdee - 1000
       break
-    case "":
+    case "maintain":
       break
     case "gain .25kg a week":
       tdee2 = tdee + 250
