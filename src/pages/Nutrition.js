@@ -33,7 +33,7 @@ export default function Nutrition() {
       name: meal.title,
       calories: meal.calories,
       fat: meal.fat,
-      carbs: meal.carb
+      carb: meal.carb
     })
     })
     console.log(mealsChosen)
