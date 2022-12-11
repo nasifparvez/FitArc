@@ -143,7 +143,7 @@ export default function Nutrition() {
       setUserDietPref(records.dietOption)
       setUserHeightFeet(records.heightFeet)
       setUserHeightInches(records.heightInches)
-      setWeightGoal(records.bodyGoal)
+      setWeightGoal(records.goal)
       console.log(userWeight,userAge, userAllergen,userActivity,userSex)
     }
 
