@@ -166,7 +166,7 @@ export default function Nutrition() {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '220e5cfb44mshce089b2540207f9p1cb4f9jsne3e1c3089e33',
+      'X-RapidAPI-Key': 'e0f2dc5372msh58a1f63256d4d52p18c830jsnd8c99c6c40a2',
       'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
     }
   };
