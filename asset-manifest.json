@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/FitArc/static/css/main.9673dd3f.css",
-    "main.js": "/FitArc/static/js/main.5080dbed.js",
+    "main.js": "/FitArc/static/js/main.3c00ed8f.js",
     "index.html": "/FitArc/index.html",
     "main.9673dd3f.css.map": "/FitArc/static/css/main.9673dd3f.css.map",
-    "main.5080dbed.js.map": "/FitArc/static/js/main.5080dbed.js.map"
+    "main.3c00ed8f.js.map": "/FitArc/static/js/main.3c00ed8f.js.map"
   },
   "entrypoints": [
     "static/css/main.9673dd3f.css",
-    "static/js/main.5080dbed.js"
+    "static/js/main.3c00ed8f.js"
   ]
 }
